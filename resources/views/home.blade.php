@@ -1,6 +1,13 @@
 @extends('layouts.contents')
 @section('section')
 
+@php
+$population =json_decode($data[0]['data'])->data[0];
+$economical =json_decode($data[0]['data'])->data[1];
+$spending =json_decode($data[0]['data'])->data[2];
+
+
+@endphp
 
    <section class="nevada_dashboard_tabs_section pt-3 pb-5">
     <div class="custom_container">
@@ -21,36 +28,38 @@
            <div class="col-md-4">
              <div class="economic_cards population">
                 <img src="{{asset('images/population.png')}}" alt="icon" class="card_icon">
-                <span class="economic_type">Population</span>
-                <h5 class="economic_number">2.8 M</h5>
-                <span class="economic_year">2014</span>
+                <span class="economic_type">{{$population->Name}}</span>
+                <h5 class="economic_number">{{$population->valueformated}}</h5>
+                <span class="economic_year">{{$population->Date}}</span>
                 <div class="bottom_details">
                   <div class="prior_click">
                        <div class="arrow arrow_up">
                           <img src="{{asset('images/arrow.png')}}" alt="">
-                          <span>+1.5%</span>
+                          <span>+{{$population->prior}}</span>
                        </div>
                        <p class="text-center mb-0">vs. prior period</p>
                       </div>
                        <div class="prior_list">
                         <span class="remove_list">x</span>
                          <ul>
+                          @foreach($population->trendList as $trend)
                           <li class="label_unit">
-                            <span class="year">2006</span>
-                            <b class="unit">2.50 M</b>
+                            <span class="year">{{$trend->F_Date}}</span>
+                            <b class="unit">{{$trend->f_value}}</b>
                           </li>
-                          <li class="label_unit">
+                          @endforeach
+                          <!-- <li class="label_unit">
                             <span class="year">2007</span>
                             <b class="unit">2.50 M</b>
-                          </li>
-                          <li class="label_unit">
+                          </li> -->
+                          <!-- <li class="label_unit">
                             <span class="year">2008</span>
                             <b class="unit">2.50 M</b>
-                          </li>
-                          <li class="label_unit">
+                          </li> -->
+                          <!-- <li class="label_unit">
                             <span class="year">2009</span>
                             <b class="unit">2.50 M</b>
-                          </li>
+                          </li> -->
                          </ul>
                        </div>
                 </div>
@@ -59,14 +68,14 @@
            <div class="col-md-4">
               <div class="economic_cards employment">
                  <img src="{{asset('images/employment.png')}}" alt="icon" class="card_icon">
-                 <span class="economic_type">Employment</span>
-                 <h5 class="economic_number">2.8 M</h5>
-                 <span class="economic_year">2014</span>
+                 <span class="economic_type">{{$economical->Name}}</span>
+                <h5 class="economic_number">{{$economical->valueformated}}</h5>
+                <span class="economic_year">{{$economical->Date}}</span>
                  <div class="bottom_details">
                   <div class="prior_click">
                         <div class="arrow  arrow_down">
                            <img src="{{asset('images/arrow.png')}}" alt="">
-                           <span>+1.5%</span>
+                           <span>+{{$economical->prior}}</span>
                         </div>
                         <p class="text-center mb-0">vs. prior period</p>
                         </div>
@@ -74,22 +83,24 @@
                         <div class="prior_list">
                           <span class="remove_list">x</span>
                            <ul>
-                            <li class="label_unit">
-                              <span class="year">2006</span>
-                              <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
+                           @foreach($economical->trendList as $trend)
+                          <li class="label_unit">
+                            <span class="year">{{$trend->F_Date}}</span>
+                            <b class="unit">{{$trend->f_value}}</b>
+                          </li>
+                          @endforeach
+                            <!-- <li class="label_unit">
                               <span class="year">2007</span>
                               <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
+                            </li> -->
+                            <!-- <li class="label_unit">
                               <span class="year">2008</span>
                               <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
+                            </li> -->
+                            <!-- <li class="label_unit">
                               <span class="year">2009</span>
                               <b class="unit">2.50 M</b>
-                            </li>
+                            </li> -->
                            </ul>
                          </div>
                  </div>
@@ -98,21 +109,28 @@
             <div class="col-md-4">
               <div class="economic_cards spending">
                  <img src="{{asset('images/spending.png')}}" alt="icon" class="card_icon">
-                 <span class="economic_type">Spending</span>
-                 <h5 class="economic_number">2.8 M</h5>
-                 <span class="economic_year">2014</span>
+                 <span class="economic_type">{{$spending->Name}}</span>
+                <h5 class="economic_number">{{$spending->valueformated}}</h5>
+                <span class="economic_year">{{$spending->Date}}</span>
                  <div class="bottom_details">
                   <div class="prior_click">
                         <div class="arrow arrow_up arrow_down">
                            <span class="dot_circle">.</span>
-                           <span>+1.5%</span>
+                           <span>{{$spending->prior}}</span>
+
                         </div>
                         <p class="text-center mb-0">vs. prior period</p>
                   </div>
                         <div class="prior_list">
                           <span class="remove_list">x</span>
                            <ul>
-                            <li class="label_unit">
+                           @foreach($spending->trendList as $trend)
+                          <li class="label_unit">
+                            <span class="year">{{$trend->F_Date}}</span>
+                            <b class="unit">{{$trend->f_value}}</b>
+                          </li>
+                          @endforeach
+                            <!-- <li class="label_unit">
                               <span class="year">2006</span>
                               <b class="unit">2.50 M</b>
                             </li>
@@ -123,11 +141,11 @@
                             <li class="label_unit">
                               <span class="year">2008</span>
                               <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
+                            </li> -->
+                            <!-- <li class="label_unit">
                               <span class="year">2009</span>
                               <b class="unit">2.50 M</b>
-                            </li>
+                            </li> -->
                            </ul>
                          </div>
                  </div>
