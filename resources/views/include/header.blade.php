@@ -8,6 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+@yield('headerlinks')
+    <script src="{{asset('js/custom.js')}}" ></script>
+    <style>
+	.map-area{}
+	.map-area polygon:hover{ fill: #1f5a7b; cursor: pointer; }
+	.map-area polygon.active{ fill: #1f5a7b; cursor: pointer; }
+	.map-area polygon.disable:hover{ fill: #CABFB5; cursor: auto; }
+	.name-text polygon:hover{ fill: #000000; }
+	.name-text path:hover{ fill: #000000; }
+	.demo-hover{ fill: #1f5a7b; cursor: pointer; }
+	.name-text:hover polygon{ fill: #FFFFFF; }
+	.name-text:hover path{ fill: #FFFFFF; }
+	.name-text:hover rect{ fill: #FFFFFF; }
+	</style>
+
   </head>
   <body>
 
@@ -26,10 +41,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Economic Performance Data</a>
+                  <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{route('/')}}">Economic Performance Data</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Economic development Data</a>
+                  <a class="nav-link {{ request()->is('economical') ? 'active' : '' }}" href="{{route('/economical')}}">Economic development Data</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">location comparison</a>
