@@ -21,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NavedaController::class , 'Home'])->name('/');
 Route::get('/economical', [NavedaController::class , 'economical'])->name('/economical');
+Route::get('/map-data', [NavedaController::class , 'mapdata'])->name('/map-data');

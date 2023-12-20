@@ -3,6 +3,20 @@
 <link  rel="stylesheet" href="{{asset('css/style2.css')}}"> 
 @endsection
 
+@php
+$economy_develop =json_decode($economic[0]['data']);
+$labour =json_decode($economic[1]['data']);
+$real_state =json_decode($economic[2]['data']);
+$utilities =json_decode($economic[3]['data']);
+$taxes =json_decode($economic[4]['data']);
+
+
+
+
+
+
+
+@endphp
 @section('section')
 
 <section class="center-area">
@@ -63,7 +77,38 @@
 							<th>Index</th>
 						</tr>
 					</thead>
-					<tbody id="economy-table-tbody"></tbody>
+                    <tbody id="economy-table-tbody">
+    @foreach($economy_develop->data as $val)
+        @if(isset($val->living_cost) && is_array($val->living_cost))
+            @php $firstRow = true; @endphp
+            @foreach($val->living_cost as $living)
+                <tr>
+                    <td>{{$firstRow ? $val->Name : ''}}</td>
+                    <td>{{$firstRow ? $val->population : ''}}</td>
+                    <td>{{$firstRow ? $val->income : ''}}</td>
+                    <td>{{$firstRow ? $val->degree : ''}}</td>
+                    <td>{{$firstRow ? $val->gross : ''}}</td>
+                    <td>{{$firstRow ? $val->gross_capita : ''}}</td>
+                    <td>{{key($living)}}</td>
+                    <td>{{current($living)}}</td>
+                </tr>
+                @php $firstRow = false; @endphp
+            @endforeach
+        @else
+            <tr>
+                <td>{{$val->Name ?? ''}}</td>
+                <td>{{$val->population ?? ''}}</td>
+                <td>{{$val->income ?? ''}}</td>
+                <td>{{$val->degree ?? ''}}</td>
+                <td>{{$val->gross ?? ''}}</td>
+                <td>{{$val->gross_capita ?? ''}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        @endif
+    @endforeach
+</tbody>
+
 				</table>			
 			</div>
 			<!-- Tabke End -->	
@@ -79,7 +124,26 @@
 						</tr>
 						<tr><th>&nbsp;</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th></tr>
 					</thead>
-					<tbody id="labor-table-tbody"></tbody>
+					<tbody id="labor-table-tbody">
+                        @foreach($labour->data as $labor)
+                    <tr>
+                    <td>{{$labor->total_nonfarm->Name ?? 'n.a'}}</td>
+                    <td>{{$labor->total_nonfarm->Value ?? 'n.a'}}</td>
+                    <td>{{$labor->total_nonfarm->Date ?? 'n.a'}}</td>
+                    <td>{{$labor->total_nonfarm->LastYear ?? 'n.a'}}<i class="fa {{$labor->total_nonfarm->sign ?? 'n.a'}}"></i></td>
+                    <td>{{$labor->weekly->Value ?? 'n.a'}}</td>
+                    <td>{{$labor->weekly->Date ?? 'n.a'}}</td>
+                    <td>{{$labor->weekly->LastYear ?? 'n.a'}}<i class="fa {{$labor->weekly->sign ?? 'n.a'}}"></i></td>
+                    <td>{{$labor->pri_business->Value ?? 'n.a'}}</td>
+                    <td>{{$labor->pri_business->Date ?? 'n.a'}}</td>
+                    <td>{{$labor->pri_business->LastYear ?? 'n.a'}}<i class="fa {{$labor->pri_business->sign ?? 'n.a'}}"></i></td>
+                    <td>{{$labor->unemployment->Value ?? 'n.a'}}</td>
+                    <td>{{$labor->unemployment->Date ?? 'n.a'}}</td>
+                    <td>{{$labor->unemployment->LastYear ?? 'n.a'}}<i class="fa {{$labor->unemployment->sign ?? 'n.a'}}"></i></td>
+                </tr>
+                @endforeach
+        </tbody>
+                    
 				</table>			
 			</div>
 			<!-- Table Start -->
@@ -94,7 +158,36 @@
 						</tr>
 						<tr><th>&nbsp;</th><th class="t-left">Location</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th></tr>
 					</thead>
-					<tbody id="real-estate-table-tbody"></tbody>
+					<tbody id="real-estate-table-tbody">
+                        @foreach($real_state->data as $real_state)
+                    <tr>
+                    <td>{{$real_state->Loc ?? ''}}</td>
+                    <td>{{$real_state->Geo ?? 'n.a'}}</td>
+                    <td>{{$real_state->office->Value ?? 'n.a'}}</td>
+                    <td>{{$real_state->office->Date ?? 'n.a'}}</td>
+                    <td>{{$real_state->office->LastYear ?? 'n.a'}} <i class="fa {{$real_state->office->sign ?? 'n.a'}}"></i></td>
+                    <td>{{$real_state->industrial->Value ?? 'n.a'}}</td>
+                    <td>{{$real_state->industrial->Date ?? 'n.a'}}</td>
+                    <td>{{$real_state->industrial->LastYear ?? 'n.a'}} <i class="fa {{$real_state->industrial->sign ?? 'n.a'}}"></i></td>
+                    <td>{{$real_state->existing->Value ?? 'n.a'}}</td>
+                    <td>{{$real_state->existing->Date ?? 'n.a'}}</td>
+                    <td>{{$real_state->existing->LastYear ?? 'n.a'}} <i class="fa {{$real_state->existing->sign ?? 'n.a'}}"></i></td>
+                    <tr>
+                    <td></td>
+                    <!-- <td>Northern Nevada</td>
+                    <td>$1.96</td>
+                    <td>Q4 2022</td>
+                    <td>0.0% <i class="fa fa-circle yellow"></i></td>
+                    <td>$0.91</td>
+                    <td>Q4 2022</td>
+                    <td>54.2% <i class="fa fa-caret-up green"></i></td>
+                    <td>$608.00K</td>
+                    <td>Q3 2023</td>
+                    <td>2.9% <i class="fa fa-caret-up green"></i></td> -->
+                </tr>
+                @endforeach
+                </tr>
+</tbody>
 				</table>			
 			</div>
 			<!-- Tabke End -->
@@ -111,7 +204,25 @@
 						</tr>
 						<tr><th>&nbsp;</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th></tr>
 					</thead>
-					<tbody id="utilities-table-tbody"></tbody>
+					<tbody id="utilities-table-tbody">
+                        @foreach($utilities->data as $utilitie)
+                    <tr>
+                    <td>{{$utilitie->Loc ??''}}</td>
+                    <td>{{$utilitie->ind_elec->Value ??''}}</td>
+                    <td>{{$utilitie->ind_elec->Date ??''}}</td>
+                    <td>{{$utilitie->ind_elec->LastYear ??''}}<i class="fa {{$utilitie->ind_elec->sign ??''}}"></i></td>
+                    <td>{{$utilitie->com_elec->Value ??''}}</td>
+                    <td>{{$utilitie->com_elec->Date ??''}}</td>
+                    <td>{{$utilitie->com_elec->LastYear ??''}}<i class="fa {{$utilitie->com_elec->sign ??''}}"></i></td>
+                    <td>{{$utilitie->ind_nat->Value ??''}}</td>
+                    <td>{{$utilitie->ind_nat->Date ??''}}</td>
+                    <td>{{$utilitie->ind_nat->LastYear ??''}}<i class="fa {{$utilitie->ind_nat->sign ??''}}"></i></td>
+                    <td>{{$utilitie->com_nat->Value ??''}}</td>
+                    <td>{{$utilitie->com_nat->Date ??''}}</td>
+                    <td>{{$utilitie->com_nat->LastYear ??''}}<i class="fa {{$utilitie->com_nat->sign ??''}}"></i></td>
+                </tr>
+                @endforeach
+</tbody>
 				</table>			
 			</div>
 			<!-- Tabke End -->
@@ -127,7 +238,22 @@
 						</tr>
 						<tr><th>&nbsp;</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th><th>Current</th><th>Date</th><th>Change</th></tr>
 					</thead>
-					<tbody id="taxes-table-tbody"></tbody>
+					<tbody id="taxes-table-tbody">
+                        @foreach($taxes->data as $tax)
+                    <tr>
+                    <td>{{$tax->Loc ?? ''}}</td>
+                    <td>{{$tax->sales->Value ?? ''}}</td>
+                    <td>{{$tax->sales->Date ?? ''}}</td>
+                    <td>{{$tax->sales->LastYear ?? ''}} <i class="fa {{$tax->sales->sign ?? ''}}"></i></td>
+                    <td>{{$tax->individual->Value ?? ''}}</td>
+                    <td>{{$tax->individual->Date ?? ''}}</td>
+                    <td>{{$tax->individual->LastYear ?? ''}} <i class="fa {{$tax->individual->sign ?? ''}}"></i></td>
+                    <td>{{$tax->corporate->Value ?? ''}}</td>
+                    <td>{{$tax->corporate->Date ?? ''}}</td>
+                    <td>{{$tax->corporate->LastYear ?? ''}} <i class="fa {{$tax->corporate->sign ?? ''}}"></i></td>
+                </tr>
+                @endforeach
+</tbody>
 				</table>			
 			</div>
 			<!-- Tabke End -->		
