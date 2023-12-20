@@ -5,9 +5,11 @@ var myScript = new ( function($) {
 	
 	this.sendAjax = function(param, afterloadback)
 	{
+		//  var =param.action
+				
 		$.ajax({
-			url: "portal.php",
 			data: param,
+			url: "http://localhost:8000/mr_portal",
 			cache: false,
 			type: 'post',
 			dataType: 'json',
@@ -16,6 +18,7 @@ var myScript = new ( function($) {
 			},
 			success: function(reData, status, xhr) {
 				$(".loader-overlay").hide();
+				
 				afterloadback(reData);
 			}
 		});
@@ -553,24 +556,11 @@ jQuery(document).ready(function($){
 			}
 			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#CABFB5");
 			$(this).attr('fill',"#1f5a7b");
-			// $.redirect("statewide",
-			// {
-			// 	city: cityArr[name],
-			// 	pdfName: pdfArr[name]
-			// }, "POST", "");
-			const routeUrls = {
-				statewide: window.location.href
-				// Add more route names and their URLs as needed
-			};
-			console.log( routeUrls.statewide);
-			let city = cityArr[name];
-				let pdfName = pdfArr[name];
-
-				let url = routeUrls.statewide + `map-data?city=${city}&pdfName=${pdfName}`;
-
-
-				// Redirecting the user
-				window.location.href = url;
+			$.redirect("statewide",
+			{
+				city: cityArr[name],
+				pdfName: pdfArr[name]
+			}, "POST", "");
 		});
 	}
 	
@@ -932,7 +922,9 @@ jQuery(document).ready(function($){
 			}
 			var ids = '';
 			$(ulselected).each(function(){	ids += $(this).attr('value')+',';	});
-			param = { 'action':'generate_compare', 'idss'  : ids, 'is_arr' : 1 },
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			param = { 'action':'generate_compare', 'idss'  : ids, 'is_arr' : 1, '_token':csrfToken },
 			myScript.sendAjax(param, function(result){
 				res = result.data;
 				$("#comparison-report").show();
@@ -977,10 +969,13 @@ jQuery(document).ready(function($){
 			if(type == "xls")
 			{
 				$("ul#selectmsalist li").each(function(){	ids += $(this).attr('value')+',';	});
-				var params = {"action":"comparisonReportExcel", 'idss'  : ids, "downlaod":1 };
+				const csrfToken = document.querySelector('input[name="_token"]').value;
+				var params = {"action":"comparisonReportExcel", 'idss'  : ids, "downlaod":1 ,'_token':csrfToken };
 			} else {
 				$("ul#selectmsalist li").each(function(){	ids += $(this).attr('value')+'-';	});
-				var params = {"action":"comparisonReportPDF", 'idss'  : ids, "downlaod":1, 'link': 'http://nevadadashboard.com/comparison-report.php?ids='+ids  };
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+				var params = {"action":"comparisonReportPDF", 'idss'  : ids, "downlaod":1, 'link': 'http://nevadadashboard.com/comparison-report.php?ids='+ids , '_token':csrfToken };
 			}
 			myScript.downloadReport(params);
 		});
