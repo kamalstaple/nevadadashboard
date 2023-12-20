@@ -186,6 +186,7 @@ span.economic_year {
 }
 /* footer */
 .custom_footer .custom_container p{
+    font-family: 'Fira Sans', sans-serif;  
     padding: 15px;
     font-size: 12px;
     text-align: center;
@@ -248,6 +249,28 @@ span.economic_year {
     font-family: 'Fira Sans',sans-serif;
 }
 /* list */
+
+/* css here */
+
+/* css here */
+/* map area */
+.dynamic_data_map svg{
+    width: 100%;
+    height: 508px;
+}
+.dynamic_data_map svg polygon{
+        fill: #2288c9;
+}   
+.name-text,.name-text polygon{
+    fill: #fff !important;
+}
+.name-text + g polygon,.name-text + g + g path{
+    fill: #fff !important;
+}
+.dynamic_data_map circle{
+    stroke: #9c9c9c;
+}
+/* map area */
 @media (max-width:1200px) {
     .dashboard_tabs.nav-pills .nav-item .nav-link,
     .custom_header .nav-item .nav-link{
