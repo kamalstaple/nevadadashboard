@@ -553,11 +553,24 @@ jQuery(document).ready(function($){
 			}
 			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#CABFB5");
 			$(this).attr('fill',"#1f5a7b");
-			$.redirect("statewide",
-			{
-				city: cityArr[name],
-				pdfName: pdfArr[name]
-			}, "POST", "");
+			// $.redirect("statewide",
+			// {
+			// 	city: cityArr[name],
+			// 	pdfName: pdfArr[name]
+			// }, "POST", "");
+			const routeUrls = {
+				statewide: window.location.href
+				// Add more route names and their URLs as needed
+			};
+			console.log( routeUrls.statewide);
+			let city = cityArr[name];
+				let pdfName = pdfArr[name];
+
+				let url = routeUrls.statewide + `map-data?city=${city}&pdfName=${pdfName}`;
+
+
+				// Redirecting the user
+				window.location.href = url;
 		});
 	}
 	
@@ -976,7 +989,7 @@ jQuery(document).ready(function($){
 	if($("#cityMap").length > 0)
 	{
 		$(".overlay").show();
-		$('#cityMap').load('city.svg', function(){
+		$('#cityMap').load('images/city.svg', function(){
 			$(".overlay").hide();
 		});
 	}

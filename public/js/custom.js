@@ -505,7 +505,7 @@ var myScript = new ( function($) {
 		}
 		return number;
 	}
-})(jQuery)
+});
  
 jQuery(document).ready(function($){
 	

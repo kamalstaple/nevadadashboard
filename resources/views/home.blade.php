@@ -158,7 +158,7 @@ $spending =json_decode($data[0]['data'])->data[2];
     </div>
    </section>
 
-   <section class="nevada_dynamic_data_map">
+   <section class="nevada_dynamic_data_map" id ="portal-home">
     <div class="custom_container" >
       <div class="row align-items-center">
       <div class="col-md-6">
@@ -168,8 +168,8 @@ $spending =json_decode($data[0]['data'])->data[2];
      </div>
       </div>
       <div class="col-md-6">
-         <div class="dynamic_data_map text-end">
-      <img src="{{asset('images/map.png')}}" class="img-fluid" alt="map">
+         <div class="dynamic_data_map text-end" id="cityMap">
+      <img src="{{asset('images/map-img.jpg')}}" class="img-fluid" alt="map">
          </div>
       </div>
       </div>
