@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 @yield('headerlinks')
-    <script src="{{asset('js/custom.js')}}" ></script>
+    <!-- <script src="{{asset('js/custom.js')}}" ></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <style>
 	.map-area{}
 	.map-area polygon:hover{ fill: #0c436a; cursor: pointer; }
@@ -47,10 +49,10 @@
                   <a class="nav-link {{ request()->is('economical') ? 'active' : '' }}" href="{{route('/economical')}}">Economic development Data</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">location comparison</a>
+                <a class="nav-link {{ request()->is('location_comparistion') ? 'active' : '' }}" href="{{route('/location_comparistion')}}">location comparison</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="#">Detailed overview reports</a>
+                <a class="nav-link {{ request()->is('overview') ? 'active' : '' }}" href="{{route('/overview')}}">Detailed overview reports</a>
                 </li>
               </ul>
             </div>
