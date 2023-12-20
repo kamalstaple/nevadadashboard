@@ -190,6 +190,7 @@ span.economic_year {
     padding: 15px;
     font-size: 12px;
     text-align: center;
+    color: #000000;
 }
 /* footer */
 
@@ -258,7 +259,7 @@ span.economic_year {
     width: 100%;
     height: 508px;
 }
-.dynamic_data_map svg polygon{
+.dynamic_data_map svg polygon,.map-area svg polygon{
         fill: #2288c9;
 }   
 .name-text,.name-text polygon{
@@ -267,7 +268,7 @@ span.economic_year {
 .name-text + g polygon,.name-text + g + g path{
     fill: #fff !important;
 }
-.dynamic_data_map circle{
+.dynamic_data_map circle,.map-area circle {
     stroke: #9c9c9c;
 }
 /* map area */
