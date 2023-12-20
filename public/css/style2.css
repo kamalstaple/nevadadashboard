@@ -3335,7 +3335,7 @@ textarea {
 	border-radius: 3px;
 	margin: 0 auto;
 	padding: 20px 10px;
-	width: 1000px
+    max-width: 1080px
 }
 
 .center-area .menu-bar-side {
@@ -5501,7 +5501,7 @@ table tbody tr td .fa.yellow {
 }
 
 .eco-dev-right {
-	width: 840px;
+	width: 925px;
 	float: right
 }
 

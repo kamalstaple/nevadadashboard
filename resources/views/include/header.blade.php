@@ -14,7 +14,7 @@
 
     <style>
 	.map-area{}
-	.map-area polygon:hover{ fill: #1f5a7b; cursor: pointer; }
+	.map-area polygon:hover{ fill: #0c436a; cursor: pointer; }
 	.map-area polygon.active{ fill: #1f5a7b; cursor: pointer; }
 	.map-area polygon.disable:hover{ fill: #CABFB5; cursor: auto; }
 	.name-text polygon:hover{ fill: #000000; }
