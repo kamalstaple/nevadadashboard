@@ -98,4 +98,11 @@ class NavedaController extends Controller
 		// die;
 		return $content;
 	}
+
+
+
+	public function overviewpage()
+	{
+		return view('overview');
+	}
 }

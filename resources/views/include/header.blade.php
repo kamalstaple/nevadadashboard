@@ -52,7 +52,7 @@
                 <a class="nav-link {{ request()->is('location_comparistion') ? 'active' : '' }}" href="{{route('/location_comparistion')}}">location comparison</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="#">Detailed overview reports</a>
+                <a class="nav-link {{ request()->is('overview') ? 'active' : '' }}" href="{{route('/overview')}}">Detailed overview reports</a>
                 </li>
               </ul>
             </div>
