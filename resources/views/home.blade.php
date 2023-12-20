@@ -167,7 +167,7 @@ $spending =json_decode($data[0]['data'])->data[2];
        <p>Select on a county on the map above to access key market metrics or click <a href="#" class="link_here">here</a> to obtain data for the entire state.</p>
      </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 map-area">
          <div class="dynamic_data_map text-end" id="cityMap">
       <img src="{{asset('images/map-img.jpg')}}" class="img-fluid" alt="map">
          </div>
