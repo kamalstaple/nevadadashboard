@@ -1007,7 +1007,7 @@ jQuery(document).ready(function($){
 				return false;
 			}
 			
-			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#CABFB5");
+			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#2288c9");
 			$(this).attr('fill',"#1f5a7b");
 			$("a#overviewPdf").attr('href', 'pdf/'+cityArr[name]+'.pdf');
 			$("div#objPdfSpan").html('<embed id="objPdf" width="100%" height="481" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" alt="pdf" src="pdf/'+cityArr[name]+'.pdf#view=FitH">');
