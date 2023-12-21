@@ -7,6 +7,39 @@ $economical =json_decode($data[0]['data'])->data[1];
 $spending =json_decode($data[0]['data'])->data[2];
 
 
+
+
+$populationchart = [];
+
+foreach ($population->trendList as $chartdata) {
+  $value = (float)preg_replace('/[^0-9.]/', '', $chartdata->f_value);
+    $timestamp = new DateTime($chartdata->date);
+    $timestamp = $timestamp->getTimestamp() * 1000;
+    $populationchart[] = ['date' => $timestamp, 'value' => $value ];
+}
+$economicalchart = [];
+
+foreach ($economical->trendList as $chartdata) {
+  $value = (float)preg_replace('/[^0-9.]/', '', $chartdata->f_value);
+    $timestamp = new DateTime($chartdata->date);
+    $timestamp = $timestamp->getTimestamp() * 1000;
+    $economicalchart[] = ['date' => $timestamp, 'value' => $value ];
+}
+$spendingchart = [];
+
+foreach ($spending->trendList as $chartdata) {
+  $value = (float)preg_replace('/[^0-9.]/', '', $chartdata->f_value);
+    $timestamp = new DateTime($chartdata->date);
+    $timestamp = $timestamp->getTimestamp() * 1000;
+    $spendingchart[] = ['date' => $timestamp, 'value' => $value ];
+}
+
+
+
+
+
+
+
 @endphp
 
    <section class="nevada_dashboard_tabs_section pt-3 pb-5">
@@ -25,8 +58,8 @@ $spending =json_decode($data[0]['data'])->data[2];
         <div class="right_nevada_economic">
           <h4>Nevada Economic Highlights</h4>
           <div class="row">
-           <div class="col-md-4" >
-             <div class="economic_cards population">
+           <div class="col-md-4">
+             <div class="economic_cards population" id="chartdiv">
                 <img src="{{asset('images/population.png')}}" alt="icon" class="card_icon">
                 <span class="economic_type">{{$population->Name}}</span>
                 <h5 class="economic_number">{{$population->valueformated}}</h5>
@@ -66,7 +99,7 @@ $spending =json_decode($data[0]['data'])->data[2];
              </div>
            </div>
            <div class="col-md-4">
-              <div class="economic_cards employment">
+              <div class="economic_cards employment" id="chartdiv2">
                  <img src="{{asset('images/employment.png')}}" alt="icon" class="card_icon">
                  <span class="economic_type">{{$economical->Name}}</span>
                 <h5 class="economic_number">{{$economical->valueformated}}</h5>
@@ -107,7 +140,7 @@ $spending =json_decode($data[0]['data'])->data[2];
               </div>
             </div>
             <div class="col-md-4">
-              <div class="economic_cards spending">
+              <div class="economic_cards spending" id="chartdiv3">
                  <img src="{{asset('images/spending.png')}}" alt="icon" class="card_icon">
                  <span class="economic_type">{{$spending->Name}}</span>
                 <h5 class="economic_number">{{$spending->valueformated}}</h5>
@@ -176,5 +209,443 @@ $spending =json_decode($data[0]['data'])->data[2];
     </div>
    </section>
 
+   @endsection
+   @section('script')
+   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<!-- Chart code -->
+<script>
+
+am5.ready(function() {
+
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("chartdiv");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+ 
+  paddingLeft: 0
+}));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+  behavior: "none"
+}));
+// cursor.lineY.set("visible", false);
+
+
+// Generate random data
+var date = new Date();
+date.setHours(0, 0, 0, 0);
+var value = 100;
+
+function generateData() {
+  value = Math.round((Math.random() * 10 - 5) + value);
+  am5.time.add(date, "day", 1);
+  return {
+    date: date.getTime(),
+    value: value
+  };
+}
+
+function generateDatas(count) {
+  var data = [];
+  for (var i = 0; i < count; ++i) {
+    data.push(generateData());
+  }
+  console.log(data);
+  return data;
+}
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+  maxDeviation: 0.5,
+  baseInterval: {
+    timeUnit: "day",
+    count: 1
+  },
+  renderer: am5xy.AxisRendererX.new(root, {
+    minGridDistance: 80,
+    // minorGridEnabled: true,
+    pan: "zoom"
+  }),
+  tooltip: am5.Tooltip.new(root, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 1,
+  renderer: am5xy.AxisRendererY.new(root, {
+    pan: "zoom"
+  })
+}));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
+  name: "Series",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  valueXField: "date",
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{valueY}"
+  })
+}));
+
+series.fills.template.setAll({
+  visible: true,
+  fillOpacity: 0.2
+});
+
+// series.bullets.push(function () {
+//   return am5.Bullet.new(root, {
+//     locationY: 0,
+//     sprite: am5.Circle.new(root, {
+//       radius: 4,
+//       stroke: root.interfaceColors.get("background"),
+//       strokeWidth: 2,
+//       fill: series.get("fill")
+//     })
+//   });
+// });
+
+
+// Add scrollbar
+// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+// chart.set("scrollbarX", am5.Scrollbar.new(root, {
+//   orientation: "horizontal"
+// }));
+
+var chartdata = JSON.parse('<?php echo json_encode($populationchart); ?>');
+
+console.log(chartdata);
+// var data = generateDatas(50);
+
+
+// Disable x-axis and y-axis labels
+xAxis.set("renderer.labels.template.disabled", true);
+xAxis.set("renderer.grid.template.disabled", true);
+xAxis.set("visible", false);
+
+yAxis.set("renderer.labels.template.disabled", true);
+yAxis.set("renderer.grid.template.disabled", true);
+yAxis.set("visible", false);
+
+
+  series.data.setAll(chartdata);
+
+
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+// series.appear(1000);
+chart.appear(1000, 100);
+
+}); // end am5.ready()
+</script>
+   
+
+<script>
+
+am5.ready(function() {
+
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("chartdiv3");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+
+  paddingLeft: 0
+}));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+  behavior: "none"
+}));
+cursor.lineY.set("visible", false);
+
+
+// Generate random data
+var date = new Date();
+date.setHours(0, 0, 0, 0);
+var value = 100;
+
+function generateData() {
+  value = Math.round((Math.random() * 10 - 5) + value);
+  am5.time.add(date, "day", 1);
+  return {
+    date: date.getTime(),
+    value: value
+  };
+}
+
+function generateDatas(count) {
+  var data = [];
+  for (var i = 0; i < count; ++i) {
+    data.push(generateData());
+  }
+  return data;
+}
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+  maxDeviation: 0.5,
+  baseInterval: {
+    timeUnit: "day",
+    count: 1
+  },
+  renderer: am5xy.AxisRendererX.new(root, {
+    // minGridDistance: 80,
+    // minorGridEnabled: true,
+    pan: "zoom"
+  }),
+  tooltip: am5.Tooltip.new(root, {})
+}));
+// xAxis.get("renderer.grid.template").set("disabled", true);
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  // maxDeviation: 1,
+  renderer: am5xy.AxisRendererY.new(root, {
+    pan: "zoom"
+  })
+}));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
+  name: "Series",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  valueXField: "date",
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{valueY}"
+  })
+}));
+
+series.fills.template.setAll({
+  visible: true,
+  fillOpacity: 0.2
+});
+
+// series.bullets.push(function () {
+//   return am5.Bullet.new(root, {
+//     locationY: 0,
+//     sprite: am5.Circle.new(root, {
+//       radius: 4,
+//       stroke: root.interfaceColors.get("background"),
+//       strokeWidth: 2,
+//       fill: series.get("fill")
+//     })
+//   });
+// });
+
+
+// Add scrollbar
+// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+// chart.set("scrollbarX", am5.Scrollbar.new(root, {
+//   orientation: "horizontal"
+// }));
+
+
+
+var chartdata = JSON.parse('<?php echo json_encode($economicalchart); ?>');
+
+console.log(chartdata);
+// var data = generateDatas(50);
+xAxis.set("renderer.labels.template.disabled", true);
+xAxis.set("renderer.grid.template.strokeWidth ", 0);
+xAxis.set("visible", false);
+
+yAxis.set("renderer.labels.template.disabled", true);
+yAxis.set("renderer.grid.template.strokeWidth ", 0);
+yAxis.set("visible", false);
+
+  series.data.setAll(chartdata);
+
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
+
+}); // end am5.ready()
+</script>
+<script>
+
+am5.ready(function() {
+
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("chartdiv2");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+
+  paddingLeft: 0
+}));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+  behavior: "none"
+}));
+cursor.lineY.set("visible", false);
+
+
+// Generate random data
+var date = new Date();
+date.setHours(0, 0, 0, 0);
+var value = 100;
+
+function generateData() {
+  value = Math.round((Math.random() * 10 - 5) + value);
+  am5.time.add(date, "day", 1);
+  return {
+    date: date.getTime(),
+    value: value
+  };
+}
+
+function generateDatas(count) {
+  var data = [];
+  for (var i = 0; i < count; ++i) {
+    data.push(generateData());
+  }
+  return data;
+}
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+  maxDeviation: 0.5,
+  baseInterval: {
+    timeUnit: "day",
+    count: 1
+  },
+  renderer: am5xy.AxisRendererX.new(root, {
+    minGridDistance: 80,
+    // minorGridEnabled: true,
+    pan: "zoom"
+  }),
+  tooltip: am5.Tooltip.new(root, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 1,
+  renderer: am5xy.AxisRendererY.new(root, {
+    pan: "zoom"
+  })
+}));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
+  name: "Series",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  valueXField: "date",
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{valueY}"
+  })
+}));
+
+series.fills.template.setAll({
+  visible: true,
+  fillOpacity: 0.2
+});
+
+// series.bullets.push(function () {
+//   return am5.Bullet.new(root, {
+//     locationY: 0,
+//     sprite: am5.Circle.new(root, {
+//       radius: 4,
+//       stroke: root.interfaceColors.get("background"),
+//       strokeWidth: 2,
+//       fill: series.get("fill")
+//     })
+//   });
+// });
+
+
+// Add scrollbar
+// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+// chart.set("scrollbarX", am5.Scrollbar.new(root, {
+//   orientation: "horizontal"
+// }));
+
+
+var chartdata = JSON.parse('<?php echo json_encode($spendingchart); ?>');
+
+console.log(chartdata);
+// var data = generateDatas(50);
+xAxis.set("renderer.labels.template.disabled", true);
+xAxis.set("renderer.grid.template.disabled", true);
+xAxis.set("visible", false);
+
+yAxis.set("renderer.labels.template.disabled", true);
+yAxis.set("renderer.grid.template.disabled", true);
+yAxis.set("visible", false);
+
+
+  series.data.setAll(chartdata);
+
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
+
+}); // end am5.ready()
+</script>
+
+   
    @endsection
  
