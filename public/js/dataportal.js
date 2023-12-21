@@ -849,13 +849,17 @@ jQuery(document).ready(function($){
 		$(document).on('click', ".eco-dev-print", function(){
 			var tab = $(".navigation li.active").attr('data-tab');
 			var file = fileNames[tab];
-			var params = {"action":file+"Pdf", "downlaod":1 };
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			var params = {"action":file+"Pdf", "downlaod":1 , "_token":csrfToken};
 			myScript.downloadReport(params);
 		});
 		$(document).on('click', ".eco-dev-excel", function(){
 			var tab = $(".navigation li.active").attr('data-tab');
 			var file = fileNames[tab];
-			var params = {"action":file+"Xls", "downlaod":1 };
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			var params = {"action":file+"Xls", "downlaod":1 , "_token":csrfToken };
 			myScript.downloadReport(params);
 		});
 	}
@@ -991,6 +995,7 @@ jQuery(document).ready(function($){
 	
 	if($("#detail-overview").length > 0)
 	{
+		
 		var cityArr = {'humboldt':'Humboldt', 'carson-city':'Carson', 'churchill' : 'Churchill', 'clark':'Clark', 'douglas':'Douglas', 'elko':'Elko', 'esmeralda':'Esmeralda', 'eureka':'Eureka', 'lander':'Lander', 'lincoln':'Lincoln', 'lyon':'Lyon', 'mineral':'Mineral', 'nye':'Nye', 'pershing':'Pershing', 'storey':'Storey', 'washoe':'Washoe', 'white-pine':'White Pine' };
 		
 		$(document).on('click', "#cityMap svg polygon, #cityMap svg path", function(){
@@ -1002,6 +1007,7 @@ jQuery(document).ready(function($){
 				return;
 			}
 			var name = $.trim($(this).attr("id"));
+			
 			if(typeof cityArr[name] == "undefined")
 			{
 				return false;
