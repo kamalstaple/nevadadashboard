@@ -1,8 +1,14 @@
+
+
+<!-- <div class="loader-overlay dn">
+	<div class="loader"><img src="img/main-loader.svg"></div>
+</div> -->
 <footer class="custom_footer">
     <div class="custom_container">
     <p >© Copyright 2023. All rights reserved. Powered by <img src="images/pawprint.png" alt="Pawprint"> myResearcher.com</p>
     </div>
    </footer>
+   @yield('script')
     <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/jquery.tmpl.min.js')}}"></script>
   <script src="{{asset('js/dataportal.js')}}"></script>

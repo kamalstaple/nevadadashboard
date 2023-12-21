@@ -9,10 +9,8 @@
 
 <section class="center-area" id="detail-overview">
 	<section class="home-inner">
-		<div class="dor-left ">
-			<div class="map-area" id="cityMap">
-				
-			</div>
+		<div class="dor-left">
+			<div class="map-area" id="cityMap"></div>
 			<h4>State of Nevada</h4>
 			<p>Select a county on the map above to access key market metrics or click <a href="javascript:void(0);" class="reloads">here</a> to obtain data for the entire state.</p>
 		</div>

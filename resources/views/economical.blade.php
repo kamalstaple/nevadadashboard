@@ -59,6 +59,7 @@ $taxes =json_decode($economic[4]['data']);
 		</div>
 		<div class="eco-dev-right">
 			<h2 id="economic-head">Economic comparison by state</h2>
+			@csrf
 			<span class="icons eco-dev-print" title="Download PDF"><i class="fa fa-print"></i></span>
 			<span class="icons mr1 download-btn eco-dev-excel" title="Download Excel"><i class="fa fa-download"></i></span>
 			<div class="clear"></div>
