@@ -100,16 +100,16 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
 .economic_cards {
     background-color: #f5f5f5;
     padding: 15px;
-    background-image: url(../images/bg_card2.png);
+    /* background-image: url(../images/bg_card2.png); */
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 327px;
     position: relative;
 }
-.economic_cards.population{
+/* .economic_cards.population{
     background-image: url(../images/bg_card.png);
-}
+} */
 span.economic_type {
     display: block;
     font-size: 14px;
@@ -194,11 +194,15 @@ span.economic_year {
     color: #000000;
 }
 /* footer */
-
+section.nevada_dashboard_tabs_section.pt-3.pb-5 {
+    position: relative;
+    z-index: 999;
+}
 /* list */
 /* .economic_cards.active{
     background-position: center;
 } */
+
 .prior_list {
     /* display: none; */
     opacity: 0;
@@ -208,8 +212,9 @@ span.economic_year {
     position: absolute;
     right: 0px;
     left: 0px;
-   top: 73%;
+    top: -20%;
     transition: 0.3s ease-in-out;
+    margin: 0px -15px;
 }
 .prior_list.active,.economic_cards.active .prior_list{
     display: block;
@@ -273,6 +278,36 @@ span.economic_year {
     stroke: #9c9c9c;
 }
 /* map area */
+
+/* home chart */
+.bottom_details {
+    position: relative;
+    z-index: 3;
+}
+.bottom_details + div {
+    position: absolute !important;
+    left: 0px;
+    right: 0px;
+    bottom: -8px;
+    height: 200px !important;
+    z-index: 1;
+}
+.bottom_details + div div:nth-child(1n),.bottom_details + div div:nth-child(2n) {
+    height: 100% !important;
+}
+.bottom_details + div div:nth-child(1n) canvas.am5-layer-0 {
+    height: 100% !important;
+    width: 100% !important;
+}
+.bottom_details + div  canvas.am5-layer-30 {
+    height: 200px !important;
+}
+/* home chart */
+@media (min-width:767px) {
+    .bottom_details + div div:nth-child(1n) canvas.am5-layer-0{
+        width: 109% !important;
+    }
+}
 @media (max-width:1200px) {
     .dashboard_tabs.nav-pills .nav-item .nav-link,
     .custom_header .nav-item .nav-link{

@@ -311,7 +311,7 @@ var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.2
+  fillOpacity: 0.5
 });
 
 // series.bullets.push(function () {
@@ -457,7 +457,7 @@ var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.2
+  fillOpacity: 0.5
 });
 
 // series.bullets.push(function () {
@@ -598,7 +598,7 @@ var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.2
+  fillOpacity: 0.5
 });
 
 // series.bullets.push(function () {
