@@ -19,7 +19,7 @@ $taxes =json_decode($economic[4]['data']);
 @endphp
 @section('section')
 
-<section class="center-area">
+<section class="center-area" data-aos="zoom-in-up" data-aos-duration="1000">
 	<section class="home-inner" id="economic-development">
 		<div class="eco-dev-left">
 			<div class="navigation">

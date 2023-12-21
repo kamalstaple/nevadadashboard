@@ -12,7 +12,7 @@ $spending =json_decode($data[0]['data'])->data[2];
    <section class="nevada_dashboard_tabs_section pt-3 pb-5">
     <div class="custom_container">
       <div class="row nevada_economic_highlights">
-        <div class="col-lg-4">
+        <div class="col-lg-4" data-aos="fade-right" data-aos-duration="2000">
            <div class="text_block">
               <h3>Nevada Dashboard</h3>
               <p>Welcome to the Nevada Governor’s Office of Economic Development (GOED) data portal. 
@@ -21,11 +21,11 @@ $spending =json_decode($data[0]['data'])->data[2];
                   This page provides useful data and links to get information about Nevada’s economy and its consumers. Click on any of the counties on the map to the right to get information on population, employment, spending and other key market metrics.</p>
            </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8" data-aos="fade-left" data-aos-duration="3000">
         <div class="right_nevada_economic">
           <h4>Nevada Economic Highlights</h4>
           <div class="row">
-           <div class="col-md-4">
+           <div class="col-md-4" >
              <div class="economic_cards population">
                 <img src="{{asset('images/population.png')}}" alt="icon" class="card_icon">
                 <span class="economic_type">{{$population->Name}}</span>
@@ -161,13 +161,13 @@ $spending =json_decode($data[0]['data'])->data[2];
    <section class="nevada_dynamic_data_map" id ="portal-home">
     <div class="custom_container" >
       <div class="row align-items-center">
-      <div class="col-md-6">
+      <div class="col-md-6" data-aos="zoom-in-down" data-aos-duration="2000">
      <div class="text_block">
        <h4>Nevada Dynamic Data Map</h4>
        <p>Select on a county on the map above to access key market metrics or click <a href="#" class="link_here">here</a> to obtain data for the entire state.</p>
      </div>
       </div>
-      <div class="col-md-6 map-area">
+      <div class="col-md-6 map-area" data-aos="zoom-in-left" data-aos-duration="3000">
          <div class="dynamic_data_map text-end" id="cityMap">
       <img src="{{asset('images/map-img.jpg')}}" class="img-fluid" alt="map">
          </div>

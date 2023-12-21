@@ -23,7 +23,7 @@
 			<a class="msg-cross"><i class="fa fa-close"></i></a>
 		</div>
 		<div class="comparison-area">
-			<div class="left">
+			<div class="left" data-aos="zoom-in-right" data-aos-duration="1500">
 				<div class="counting">&nbsp;</div>
 				<h5>Available MSAs</h5>
 				<div class="list-area">
@@ -60,26 +60,26 @@
                     </ul>
 				</div>
 			</div>
-			<div class="arrow-left">
+			<div class="arrow-left" data-aos="zoom-in-right" data-aos-duration="1500">
 				<span class="arrow-set move-right"><i class="fa fa-angle-right"></i></span>
 				<span class="arrow-set move-left"><i class="fa fa-angle-left"></i></span>
 			</div>
 			
-			<div class="right">
+			<div class="right"  data-aos="zoom-in-left" data-aos-duration="1500">
 				<div class="counting">Count: <span id="cntMSA">[2]</span></div>
 				<h5>Selected MSAs</h5>
 				<div class="list-area">
 					<ul id="selectmsalist" class="right-ul"><li data-state="Nevada" value="492" title="Las Vegas-Paradise, NV Metropolitan Statistical Area (Las Vegas MSA (NV))" class="">Las Vegas-Paradise, NV Metropolitan Statistical Area</li><li data-state="Nevada" value="488" title="Reno-Sparks, NV Metropolitan Statistical Area (Reno MSA (NV))" class="">Reno-Sparks, NV Metropolitan Statistical Area</li></ul>
 				</div>
 			</div>
-                    <div class="arrow-right">
+                    <div class="arrow-right" data-aos="zoom-in-left" data-aos-duration="1500">
 				<span class="arrow-set move-up"><i class="fa fa-angle-up"></i></span>
 				<span class="arrow-set move-down"><i class="fa fa-angle-down"></i></span>
 			</div>
 			<div class="clear"></div>
 		</div>
 		
-		<div class="btn-margin">
+		<div class="btn-margin" data-aos="fade-up" data-aos-duration="3000">
         @csrf
 			<a href="javascript:void(0);"><button class="btn" id="generate_report"  >Generate Report</button></a>
 		</div>
