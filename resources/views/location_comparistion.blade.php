@@ -79,7 +79,7 @@
 			<div class="clear"></div>
 		</div>
 		
-		<div class="btn-margin" data-aos="fade-up" data-aos-duration="3000">
+		<div class="btn-margin" data-aos="fade-up" data-aos-duration="2000">
         @csrf
 			<a href="javascript:void(0);"><button class="btn" id="generate_report"  >Generate Report</button></a>
 		</div>
