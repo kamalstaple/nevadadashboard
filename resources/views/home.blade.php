@@ -202,6 +202,7 @@ foreach ($spending->trendList as $chartdata) {
       </div>
       <div class="col-md-6 map-area">
          <div class="dynamic_data_map text-end" id="cityMap">
+         <meta name="csrf-token" content="{{ csrf_token() }}">
       <img src="{{asset('images/map-img.jpg')}}" class="img-fluid" alt="map">
          </div>
       </div>
@@ -224,7 +225,7 @@ am5.ready(function() {
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
 var root = am5.Root.new("chartdiv");
-
+// root.htmlElement.classList.add("your-class-name");
 
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -240,7 +241,6 @@ var chart = root.container.children.push(am5xy.XYChart.new(root, {
   paddingLeft: 0
 }));
 
-// Add cursor
 // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
 var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
   behavior: "none"

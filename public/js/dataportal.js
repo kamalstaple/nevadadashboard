@@ -20,10 +20,12 @@ var myScript = new ( function($) {
 				$(".loader-overlay").hide();
 				
 				afterloadback(reData);
+				return reData;
 			}
 		});
 	}
 	this.DrawQuickGraph = function(graphData, divID) {
+		
 		var Chart = new AmCharts.AmSerialChart();
 		Chart.zoomOutButton = {
 			backgroundColor: '#000000',
@@ -333,7 +335,11 @@ var myScript = new ( function($) {
 			return false;
 		}
 		$("span#mult-axe").hide();
-		param = { 'action':'main_grid_data', 'ids': indicators, 'is_arr' : 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'main_grid_data', 'ids': indicators, 'is_arr' : 1 , '_token':csrfToken},
+		console.log(param);
+
 		myScript.sendAjax(param, function(data){
 			$('#thegrid').html('');
 			$('#template-list-view-name').tmpl(data.data).appendTo('#thegrid');
@@ -375,7 +381,9 @@ var myScript = new ( function($) {
 		} else {
 			$("span#mult-axe").hide();
 		}
-		param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr': 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr': 1 , '_token':csrfToken},
 		myScript.sendAjax(param, function(data){
 			$("#chart-area").attr("data-graph",JSON.stringify(data.data));
 			$("#chart-area").attr("data-indicator", cnt);
@@ -554,35 +562,45 @@ jQuery(document).ready(function($){
 			{
 				return false;
 			}
+			// alert(pdfArr[name]);
+			// return false;
 			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#CABFB5");
+
 			$(this).attr('fill',"#1f5a7b");
 			$.redirect("statewide",
 			{
 				city: cityArr[name],
-				pdfName: pdfArr[name]
-			}, "POST", "");
+				pdfName: pdfArr[name],
+
+			}, "GET", "");
 		});
 	}
 	
 	if($("#statewides").length > 0)
 	{
 		var city = $("#statewides").attr("data-city");
-		param = { 'action':'statewide_data', 'tab'  : city, 'is_arr' : 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'statewide_data', 'tab'  : city, 'is_arr' : 1, '_token':csrfToken},
 		myScript.sendAjax(param, function(result){
 			res = result.data;
-			if(result.data.length > 0 && result.result > 0)
-			{
-				var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
+			
+			// console.log(result);
+			// if(result.data.length > 0 && result.result > 0)
+			// {
+			// 	var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
 				
-			} else {
-				var rowHtml = '<tr><td colspan="10"></td></tr>';
-			}
-			$.template("html-list", rowHtml);
-			$("tbody#main-table-list").html('');
-			$.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
+			// } else {
+			// 	var rowHtml = '<tr><td colspan="10"></td></tr>';
+			// }
+			// $.template("html-list", rowHtml);
+			// $("tbody#main-table-list").html('');
+			// $.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
 			$(".trend-line").each(function(){
 				data = $(this).attr('data-graph');
 				divID = $(this).attr('id');
+				
+				
 				myScript.DrawTrend($.parseJSON(data), divID);
 			});
 		});
@@ -622,6 +640,7 @@ jQuery(document).ready(function($){
 			var name = $(this).find("td.name").text();
 			var loc = $(this).find("td.location").text();
 			var adj = $(this).attr("data-adjs");
+		
 			if($(this).hasClass('active'))
 			{
 				$("#_indicator_graph_"+ID).remove();
@@ -645,6 +664,7 @@ jQuery(document).ready(function($){
 		});
 		
 		$(document).on("change", ".box-select", function(){
+			// alert('ok');
 			var ID = $(this).parents('.box-area').attr('data-id');
 			$('#_indicator_graph_'+ID).attr('data-axiskey',$(this).val());
 
@@ -654,7 +674,9 @@ jQuery(document).ready(function($){
 				indicators += $(this).attr("data-value")+"_"+$(this).attr("data-axiskey")+",";
 				cnt++;
 			});
-			param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr':1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr':1 ,'_token':csrfToken },
 			myScript.sendAjax(param, function(data){
 				$("#chart-area").attr("data-graph",JSON.stringify(data.chart));
 				$("#chart-area").attr("data-indicator", cnt);
@@ -698,6 +720,7 @@ jQuery(document).ready(function($){
 		$(".cross-chart").click(function(){
 			$(".indi-chart-area").slideUp();
 			$("tbody#main-table-list tr").removeClass('active');
+			
 			$('#_graph_holder').html('');
 			$("#box-areas").html('').show();
 			$("#thegrid").html('').show();
@@ -787,7 +810,9 @@ jQuery(document).ready(function($){
 				indicators += $(this).attr("data-value")+"_"+$(this).attr("data-axiskey")+",";
 			});
 			if(indicators == ''){ return false;	}
-			var params = {"action":"mainchartexport", "downlaod":1, "ids":indicators, "format":rType};
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			var params = {"action":"mainchartexport", "downlaod":1, "ids":indicators, "format":rType , '_token':csrfToken};
 			myScript.downloadReport(params);
 		});
 		$(document).on('click', 'body', function(e){
@@ -1030,3 +1055,16 @@ jQuery(document).ready(function($){
 		$(".header-right").toggle();
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -557,7 +557,7 @@ jQuery(document).ready(function($){
 			{
 				city: cityArr[name],
 				pdfName: pdfArr[name]
-			}, "POST", "");
+			}, "Get", "");
 		});
 	}
 	
