@@ -59,7 +59,8 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
     }
 }
 .dashboard_tabs.nav-pills .nav-item .nav-link.active,
-.custom_header .nav-item .nav-link.active{
+.custom_header .nav-item .nav-link.active,
+.custom_header .nav-item .nav-link:hover{
     background-color: #f1bf3f;
     color: #424242;
 }
@@ -98,17 +99,13 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
 }
 
 .economic_cards {
-    background-color: #f5f5f5;
+    background-color: #e1e1e1;
     padding: 15px;
-    background-image: url(../images/bg_card2.png);
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 327px;
     position: relative;
-}
-.economic_cards.population{
-    background-image: url(../images/bg_card.png);
 }
 span.economic_type {
     display: block;
@@ -126,6 +123,8 @@ h5.economic_number {
     font-weight: 700;
     font-family: "Fira Sans",sans-serif;
     line-height: 58px;
+    position: relative;
+    z-index: 2;
 }
 
 span.economic_year {
@@ -137,6 +136,8 @@ span.economic_year {
     font-family: "Fira Sans",sans-serif;
     display: block;
     padding-bottom: 31px;
+    position: relative;
+    z-index: 2;
 }
 .bottom_details .arrow {
     display: flex;
@@ -158,7 +159,6 @@ span.economic_year {
     font-size: 47px;
     line-height: 20px;
     color: #ffffff;
-    /* font-family: "WINGDNG3"; */
     text-align: center;
     display: block;
     padding-bottom: 15px;
@@ -166,6 +166,7 @@ span.economic_year {
 .nevada_dynamic_data_map{
     background-color:#0c436a;
     padding: 35px 0px;
+    overflow: hidden;
 }
 .nevada_dynamic_data_map .text_block h4 {
     font-size: 24px;
@@ -185,7 +186,6 @@ span.economic_year {
     top: 77px;
     bottom: 0px;
 }
-/* footer */
 .custom_footer .custom_container p{
     font-family: 'Fira Sans', sans-serif;  
     padding: 15px;
@@ -193,14 +193,11 @@ span.economic_year {
     text-align: center;
     color: #000000;
 }
-/* footer */
-
-/* list */
-/* .economic_cards.active{
-    background-position: center;
-} */
+section.nevada_dashboard_tabs_section.pt-3.pb-5 {
+    position: relative;
+    z-index: 999;
+}
 .prior_list {
-    /* display: none; */
     opacity: 0;
     visibility: hidden;
     padding: 10px 15px;
@@ -208,8 +205,9 @@ span.economic_year {
     position: absolute;
     right: 0px;
     left: 0px;
-   top: 73%;
+    top: -20%;
     transition: 0.3s ease-in-out;
+    margin: 0px -15px;
 }
 .prior_list.active,.economic_cards.active .prior_list{
     display: block;
@@ -250,19 +248,10 @@ span.economic_year {
     margin-bottom: 5px;
     font-family: 'Fira Sans',sans-serif;
 }
-/* list */
-
-/* css here */
-
-/* css here */
-/* map area */
 .dynamic_data_map svg{
     width: 100%;
     height: 508px;
 }
-/* .dynamic_data_map svg polygon,.map-area svg polygon{
-        fill: #2288c9;
-}    */
 .name-text,.name-text polygon{
     fill: #fff !important;
 }
@@ -272,7 +261,35 @@ span.economic_year {
 .dynamic_data_map circle,.map-area circle {
     stroke: #9c9c9c;
 }
-/* map area */
+.bottom_details {
+    position: relative;
+    z-index: 3;
+}
+.bottom_details + div {
+    position: absolute !important;
+    left: 0px;
+    right: 0px;
+    bottom: -8px;
+    height: 200px !important;
+    z-index: 1;
+    overflow: hidden;
+}
+.bottom_details + div div:nth-child(1n),.bottom_details + div div:nth-child(2n) {
+    height: 100% !important;
+}
+.bottom_details + div div:nth-child(1n) canvas.am5-layer-0 {
+    height: 100% !important;
+    width: 100% !important;
+}
+.bottom_details + div  canvas.am5-layer-30 {
+    height: 200px !important;
+}
+
+@media (min-width:767px) {
+    .bottom_details + div div:nth-child(1n) canvas.am5-layer-0{
+        width: 109% !important;
+    }
+}
 @media (max-width:1200px) {
     .dashboard_tabs.nav-pills .nav-item .nav-link,
     .custom_header .nav-item .nav-link{
@@ -303,5 +320,14 @@ span.economic_year {
         background-size: contain;
         margin-bottom: 20px;
         min-height: auto;
+    }
+    .bottom_details + div div:nth-child(1n) canvas.am5-layer-0 {
+        width: 107% !important;
+    }
+    .home-inner .eco-dev-right .economy-table{
+        border-bottom: 0px;
+    }
+   .home-inner .eco-dev-right h2{
+        font-size: 15px;
     }
 }
