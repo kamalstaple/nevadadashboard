@@ -38,7 +38,11 @@ class NavedaController extends Controller
 		// print_r($request->all());
 		// die;
          $statewide = Statewide::where(['tab' =>$request->city,  'action' =>'statewide_data'])->get();
+		 if(isset($statewide[0]) && !empty($statewide[0])){
 		 return view('statewide',compact('statewide'));
+		 }else{
+			return redirect()->route('/');
+		 }
        
 
     }

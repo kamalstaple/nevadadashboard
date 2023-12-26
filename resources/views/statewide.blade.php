@@ -183,6 +183,92 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 </div>
 
 
+
+<div id='view-quick-chart' style="display:none;">
+	<div class="popup-area quick-chart-pop">
+		<div class="blue-bar">
+			<div class="pop-title">quick chart</div>
+		</div>
+		<div class="white-bar">
+			<div class="body-title quick-use" id="ind_name">${NameAlias}</div>
+			<span class="quick-pop-icon add-to-main"><i class="fa fa-plus"></i></span>
+			<span class="quick-pop-icon quick-download">
+				<i class="fa fa-download"></i>
+				<div class="quick-download-menu">
+				   <div class="heading">Export data</div>
+				   <ul>
+					   <li class="q_download_export" rel="single" type="xls" ><a href="javascript:void(0)">Excel Spreadsheet</a> </li>
+					   <li class="q_download_export" rel="single" type="csv" ><a href="javascript:void(0)">.csv File</a> </li>
+					   <li class="q_download_export" rel="single" type="pdf" ><a href="javascript:void(0)">PDF File</a> </li>
+					
+				   </ul>
+			   </div>
+			</span>
+			<div class="clr"></div>
+			<div class="quick-edit-left" id="show-quick-chart-left">
+				
+			</div>
+			<div class="quick-edit-right">
+				<div class="quick-chart-map">
+					<div id="quick_graph" data-graph=""></div>
+					<div class="map-show-scroll">
+						<div><input type="checkbox" id="show_scroll"></div>
+						<div class="input-text">Show scrollbar</div>
+						<div class="clr"></div>
+					</div>
+				</div>
+				<!-- Table start -->
+				<div class="quick-chart-table">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th colspan="4" class="blue-bg-light">Current</th>
+								<th colspan="4" class="orange-bg-light">Trailing 12 months</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="4" class="no-padding">
+									<table cellpadding="0" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th class="blue-bg-dark"></th>
+												<th class="blue-bg-dark">Value</th>
+												<th class="blue-bg-dark">MoM<br>% CHG</th>
+												<th class="blue-bg-dark">YoY<br>% CHG</th>
+											</tr>
+										</thead>
+										<tbody id="current-monthly">
+												
+										</tbody>
+									</table>
+								</td>
+								<td colspan="4" class="no-padding">
+									<table cellpadding="0" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th class="orange-bg-dark"></th>
+												<th class="orange-bg-dark">Value</th>
+												<th class="orange-bg-dark">MoM<br>% CHG</th>
+												<th class="orange-bg-dark">YoY<br>% CHG</th>
+											</tr>
+										</thead>
+										<tbody id="aggregate-monthly">
+												
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Table end -->
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+
 @endsection
 
 

@@ -197,7 +197,7 @@ foreach ($spending->trendList as $chartdata) {
       <div class="col-md-6" data-aos="zoom-in-down" data-aos-duration="2000">
      <div class="text_block">
        <h4>Nevada Dynamic Data Map</h4>
-       <p>Select on a county on the map above to access key market metrics or click <a href="#" class="link_here">here</a> to obtain data for the entire state.</p>
+       <p>Select on a county on the map above to access key market metrics or click <a href="{{route('/statewide',['city'=>'Nevada' ,'Name'=>'Nevada'])}}" class="link_here">here</a> to obtain data for the entire state.</p>
      </div>
       </div>
       <div class="col-md-6 map-area" data-aos="zoom-in-left" data-aos-duration="3000">

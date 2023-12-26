@@ -1,8 +1,10 @@
 
 
-<!-- <div class="loader-overlay dn">
+<div class="loader-overlay dn">
 	<div class="loader"><img src="img/main-loader.svg"></div>
-</div> -->
+</div>
+
+
 <footer class="custom_footer">
     <div class="custom_container">
     <p >© Copyright 2023. All rights reserved. Powered by <img src="images/pawprint.png" alt="Pawprint"> myResearcher.com</p>
