@@ -20,10 +20,12 @@ var myScript = new ( function($) {
 				$(".loader-overlay").hide();
 				
 				afterloadback(reData);
+				return reData;
 			}
 		});
 	}
 	this.DrawQuickGraph = function(graphData, divID) {
+		
 		var Chart = new AmCharts.AmSerialChart();
 		Chart.zoomOutButton = {
 			backgroundColor: '#000000',
@@ -333,7 +335,11 @@ var myScript = new ( function($) {
 			return false;
 		}
 		$("span#mult-axe").hide();
-		param = { 'action':'main_grid_data', 'ids': indicators, 'is_arr' : 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'main_grid_data', 'ids': indicators, 'is_arr' : 1 , '_token':csrfToken},
+		console.log(param);
+
 		myScript.sendAjax(param, function(data){
 			$('#thegrid').html('');
 			$('#template-list-view-name').tmpl(data.data).appendTo('#thegrid');
@@ -375,7 +381,9 @@ var myScript = new ( function($) {
 		} else {
 			$("span#mult-axe").hide();
 		}
-		param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr': 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr': 1 , '_token':csrfToken},
 		myScript.sendAjax(param, function(data){
 			$("#chart-area").attr("data-graph",JSON.stringify(data.data));
 			$("#chart-area").attr("data-indicator", cnt);
@@ -554,35 +562,45 @@ jQuery(document).ready(function($){
 			{
 				return false;
 			}
+			// alert(pdfArr[name]);
+			// return false;
 			$("#cityMap svg polygon[fill=#1f5a7b]").attr('fill',"#CABFB5");
+
 			$(this).attr('fill',"#1f5a7b");
 			$.redirect("statewide",
 			{
 				city: cityArr[name],
-				pdfName: pdfArr[name]
-			}, "POST", "");
+				pdfName: pdfArr[name],
+
+			}, "GET", "");
 		});
 	}
 	
 	if($("#statewides").length > 0)
 	{
 		var city = $("#statewides").attr("data-city");
-		param = { 'action':'statewide_data', 'tab'  : city, 'is_arr' : 1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+		param = { 'action':'statewide_data', 'tab'  : city, 'is_arr' : 1, '_token':csrfToken},
 		myScript.sendAjax(param, function(result){
 			res = result.data;
-			if(result.data.length > 0 && result.result > 0)
-			{
-				var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
+			
+			// console.log(result);
+			// if(result.data.length > 0 && result.result > 0)
+			// {
+			// 	var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
 				
-			} else {
-				var rowHtml = '<tr><td colspan="10"></td></tr>';
-			}
-			$.template("html-list", rowHtml);
-			$("tbody#main-table-list").html('');
-			$.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
+			// } else {
+			// 	var rowHtml = '<tr><td colspan="10"></td></tr>';
+			// }
+			// $.template("html-list", rowHtml);
+			// $("tbody#main-table-list").html('');
+			// $.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
 			$(".trend-line").each(function(){
 				data = $(this).attr('data-graph');
 				divID = $(this).attr('id');
+				
+				
 				myScript.DrawTrend($.parseJSON(data), divID);
 			});
 		});
@@ -622,6 +640,7 @@ jQuery(document).ready(function($){
 			var name = $(this).find("td.name").text();
 			var loc = $(this).find("td.location").text();
 			var adj = $(this).attr("data-adjs");
+		
 			if($(this).hasClass('active'))
 			{
 				$("#_indicator_graph_"+ID).remove();
@@ -645,6 +664,7 @@ jQuery(document).ready(function($){
 		});
 		
 		$(document).on("change", ".box-select", function(){
+			// alert('ok');
 			var ID = $(this).parents('.box-area').attr('data-id');
 			$('#_indicator_graph_'+ID).attr('data-axiskey',$(this).val());
 
@@ -654,7 +674,9 @@ jQuery(document).ready(function($){
 				indicators += $(this).attr("data-value")+"_"+$(this).attr("data-axiskey")+",";
 				cnt++;
 			});
-			param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr':1 },
+		const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			param = { 'action':'chartdata', 'ids'  : indicators, 'is_arr':1 ,'_token':csrfToken },
 			myScript.sendAjax(param, function(data){
 				$("#chart-area").attr("data-graph",JSON.stringify(data.chart));
 				$("#chart-area").attr("data-indicator", cnt);
@@ -698,6 +720,7 @@ jQuery(document).ready(function($){
 		$(".cross-chart").click(function(){
 			$(".indi-chart-area").slideUp();
 			$("tbody#main-table-list tr").removeClass('active');
+			
 			$('#_graph_holder').html('');
 			$("#box-areas").html('').show();
 			$("#thegrid").html('').show();
@@ -710,11 +733,15 @@ jQuery(document).ready(function($){
 		});
 		$(document).on('click', "#quick_chart", function(event){
 			var ids = $(this).parents(".popover").attr("rel");
+			// alert(ids);
+
 			if(ids == '')
 			{
 				return false;
 			}
-			param = { 'action':'quick_chart', 'is_arr':1, 'ids'  : ids },
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			param = { 'action':'quick_chart', 'is_arr':1, 'ids'  : ids , '_token':csrfToken },
 			myScript.sendAjax(param, function(data){
 				$.colorbox({ html:$("#view-quick-chart").html() });
 				charts = data.data;
@@ -755,7 +782,9 @@ jQuery(document).ready(function($){
 				var ids = id+"_single";
 				report = "indicator_report.pdf";
 			}
-			params = { 'action':'report', 'downlaod':1, 'file'  : ids },
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			params = { 'action':'report', 'downlaod':1, 'file'  : ids, '_token':csrfToken },
 			myScript.downloadReport(params);
 		});
 		$(document).on('click', ".download_export", function(){
@@ -763,13 +792,16 @@ jQuery(document).ready(function($){
 			var rel   = $(this).attr('rel');
 			var id = $(this).parents(".popover").attr("rel");
 			if(id == ''){ return false; }
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
 			if(rel == "all")
 			{
+
 				var city = $("#statewides").attr("data-city");
 				name = city;
-				var params = {"action":"export", "downlaod":1, "id":name, "format":rType, "type":"all", "dType":"v"};
+				var params = {"action":"export", "downlaod":1, "id":name, "format":rType, "type":"all", "dType":"v", '_token':csrfToken};
 			} else {
-				var params = {"action":"export", "downlaod":1, "id":id, "format":rType, "type":"single", "dType":"v"};
+				var params = {"action":"export", "downlaod":1, "id":id, "format":rType, "type":"single", "dType":"v",  '_token':csrfToken};
 			}	
 			myScript.downloadReport(params, "export");
 		});
@@ -777,7 +809,9 @@ jQuery(document).ready(function($){
 			var rType = $(this).attr('type');
 			var id = $("div#colorbox .quick-chart-pop").attr('data-id');
 			if(id == '') {	return false; }
-			var params = {"action":"export", "downlaod":1, "id":id, "format":rType, "type":"single", "dType":"v"};
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			var params = {"action":"export", "downlaod":1, "id":id, "format":rType, "type":"single", "dType":"v" , '_token':csrfToken};
 			myScript.downloadReport(params);
 		});
 		$(document).on('click', ".main_download_export", function(){
@@ -787,7 +821,9 @@ jQuery(document).ready(function($){
 				indicators += $(this).attr("data-value")+"_"+$(this).attr("data-axiskey")+",";
 			});
 			if(indicators == ''){ return false;	}
-			var params = {"action":"mainchartexport", "downlaod":1, "ids":indicators, "format":rType};
+			const csrfToken = document.querySelector('input[name="_token"]').value;
+
+			var params = {"action":"mainchartexport", "downlaod":1, "ids":indicators, "format":rType , '_token':csrfToken};
 			myScript.downloadReport(params);
 		});
 		$(document).on('click', 'body', function(e){
@@ -813,37 +849,37 @@ jQuery(document).ready(function($){
 			{
 				return;
 			}
-			param = { 'action' : actions },
-			myScript.sendAjax(param, function(result){
-				if(tab == "labor-table")
-				{
-					var rowHtml = '<tr><td>${total_nonfarm.Name}</td><td>${total_nonfarm.Value}</td><td>${total_nonfarm.Date}</td><td>${total_nonfarm.LastYear} <i class="fa ${total_nonfarm.sign}"></i></td>{{if weekly}}<td>${weekly.Value}</td><td>${weekly.Date}</td><td>${weekly.LastYear}<i class="fa  ${weekly.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}<td>${pri_business.Value}</td><td>${pri_business.Date}</td><td>${pri_business.LastYear}<i class="fa ${pri_business.sign}"></i></td><td>${unemployment.Value}</td><td>${unemployment.Date}</td><td>${unemployment.LastYear}<i class="fa ${unemployment.sign}"></i></td></tr>';
-				}
+			// param = { 'action' : actions },
+			// myScript.sendAjax(param, function(result){
+			// 	if(tab == "labor-table")
+			// 	{
+			// 		var rowHtml = '<tr><td>${total_nonfarm.Name}</td><td>${total_nonfarm.Value}</td><td>${total_nonfarm.Date}</td><td>${total_nonfarm.LastYear} <i class="fa ${total_nonfarm.sign}"></i></td>{{if weekly}}<td>${weekly.Value}</td><td>${weekly.Date}</td><td>${weekly.LastYear}<i class="fa  ${weekly.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}<td>${pri_business.Value}</td><td>${pri_business.Date}</td><td>${pri_business.LastYear}<i class="fa ${pri_business.sign}"></i></td><td>${unemployment.Value}</td><td>${unemployment.Date}</td><td>${unemployment.LastYear}<i class="fa ${unemployment.sign}"></i></td></tr>';
+			// 	}
 				
-				if(tab == "economy-table")
-				{
-					var rowHtml = '<tr><td>${Name}</td><td>${population}</td><td>${income}</td><td>${degree}</td><td>${gross}</td><td>${gross_capita}</td>{{if living_cost}}{{each(i, key) living_cost[0]}}<td>${i}</td><td>${key}</td></tr>{{/each}}{{else}}<td>n.a.</td><td>n.a.</td></tr>{{/if}}{{if living_cost }}{{each(i,key) living_cost[1]}}<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>${i}</td><td>${key}</td></tr>{{/each}}{{/if}}';
-				}
+			// 	if(tab == "economy-table")
+			// 	{
+			// 		var rowHtml = '<tr><td>${Name}</td><td>${population}</td><td>${income}</td><td>${degree}</td><td>${gross}</td><td>${gross_capita}</td>{{if living_cost}}{{each(i, key) living_cost[0]}}<td>${i}</td><td>${key}</td></tr>{{/each}}{{else}}<td>n.a.</td><td>n.a.</td></tr>{{/if}}{{if living_cost }}{{each(i,key) living_cost[1]}}<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>${i}</td><td>${key}</td></tr>{{/each}}{{/if}}';
+			// 	}
 				
-				if(tab == "real-estate-table")
-				{
-					var rowHtml = '<tr>{{if Loc}}<td>${Loc}</td>{{else}}<td></td>{{/if}}{{if Geo}}<td>${Geo}</td>{{else}}<td></td>{{/if}}{{if office}}<td>${office.Value}</td><td>${office.Date}</td><td>${office.LastYear} <i class="fa ${office.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if industrial}}<td>${industrial.Value}</td><td>${industrial.Date}</td><td>${industrial.LastYear} <i class="fa ${industrial.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if existing}}<td>${existing.Value}</td><td>${existing.Date}</td><td>${existing.LastYear} <i class="fa ${existing.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
-				}
+			// 	if(tab == "real-estate-table")
+			// 	{
+			// 		var rowHtml = '<tr>{{if Loc}}<td>${Loc}</td>{{else}}<td></td>{{/if}}{{if Geo}}<td>${Geo}</td>{{else}}<td></td>{{/if}}{{if office}}<td>${office.Value}</td><td>${office.Date}</td><td>${office.LastYear} <i class="fa ${office.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if industrial}}<td>${industrial.Value}</td><td>${industrial.Date}</td><td>${industrial.LastYear} <i class="fa ${industrial.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if existing}}<td>${existing.Value}</td><td>${existing.Date}</td><td>${existing.LastYear} <i class="fa ${existing.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
+			// 	}
 				
-				if(tab == "utilities-table")
-				{
-					var rowHtml = '<tr><td>${Loc}</td>{{if ind_elec}}<td>${ind_elec.Value}</td><td>${ind_elec.Date}</td><td>${ind_elec.LastYear} <i class="fa ${ind_elec.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if com_elec}}<td>${com_elec.Value}</td><td>${com_elec.Date}</td><td>${com_elec.LastYear} <i class="fa ${com_elec.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if ind_nat}}<td>${ind_nat.Value}</td><td>${ind_nat.Date}</td><td>${ind_nat.LastYear} <i class="fa ${ind_nat.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if com_nat}}<td>${com_nat.Value}</td><td>${com_nat.Date}</td><td>${com_nat.LastYear} <i class="fa ${com_nat.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
-				}
-				if(tab == "taxes-table")
-				{
-					var rowHtml = '<tr><td>${Loc}</td>{{if sales}}<td>${sales.Value}</td><td>${sales.Date}</td><td>${sales.LastYear} <i class="fa ${sales.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if individual}}<td>${individual.Value}</td><td>${individual.Date}</td><td>${individual.LastYear} <i class="fa ${individual.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if corporate}}<td>${corporate.Value}</td><td>${corporate.Date}</td><td>${corporate.LastYear} <i class="fa ${corporate.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
-				}
-				$.template("html", rowHtml);
-				$("tbody#"+tab+"-tbody").html('');
+			// 	if(tab == "utilities-table")
+			// 	{
+			// 		var rowHtml = '<tr><td>${Loc}</td>{{if ind_elec}}<td>${ind_elec.Value}</td><td>${ind_elec.Date}</td><td>${ind_elec.LastYear} <i class="fa ${ind_elec.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if com_elec}}<td>${com_elec.Value}</td><td>${com_elec.Date}</td><td>${com_elec.LastYear} <i class="fa ${com_elec.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if ind_nat}}<td>${ind_nat.Value}</td><td>${ind_nat.Date}</td><td>${ind_nat.LastYear} <i class="fa ${ind_nat.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if com_nat}}<td>${com_nat.Value}</td><td>${com_nat.Date}</td><td>${com_nat.LastYear} <i class="fa ${com_nat.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
+			// 	}
+			// 	if(tab == "taxes-table")
+			// 	{
+			// 		var rowHtml = '<tr><td>${Loc}</td>{{if sales}}<td>${sales.Value}</td><td>${sales.Date}</td><td>${sales.LastYear} <i class="fa ${sales.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if individual}}<td>${individual.Value}</td><td>${individual.Date}</td><td>${individual.LastYear} <i class="fa ${individual.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}{{if corporate}}<td>${corporate.Value}</td><td>${corporate.Date}</td><td>${corporate.LastYear} <i class="fa ${corporate.sign}"></i></td>{{else}}<td>n.a.</td><td>n.a.</td><td>n.a.</td>{{/if}}</tr>';
+			// 	}
+			// 	$.template("html", rowHtml);
+			// 	$("tbody#"+tab+"-tbody").html('');
 				
-				$.tmpl("html", result.data).appendTo("tbody#"+tab+"-tbody");
-				selLI.attr("data-has", 1);
-			});
+			// 	$.tmpl("html", result.data).appendTo("tbody#"+tab+"-tbody");
+			// 	selLI.attr("data-has", 1);
+			// });
 		});
 		fileNames = {'economy-table':'economy','labor-table':'labor','real-estate-table':'realEstate','utilities-table':'utilities', 'taxes-table':'taxes'};
 		$(document).on('click', ".eco-dev-print", function(){
@@ -865,17 +901,18 @@ jQuery(document).ready(function($){
 	}
 	if($("#location-comparison-page").length > 0)
 	{
-		param = { 'action' : 'location_msa' },
-		myScript.sendAjax(param, function(result){
-			data = result.data;
-			var msaMarkup = '<li data-state="${state}" value="${row}" title="${msa} (${location})">${msa}</li>';
-			$.template("msaData", msaMarkup);
-			$.tmpl("msaData", data).appendTo("ul#allmsalist");
+		// 	const csrfToken = document.querySelector('input[name="_token"]').value;
+		// 	param = { 'action' : 'location_msa', '_token':csrfToken },
+		// myScript.sendAjax(param, function(result){
+		// 	data = result.data;
+		// 	var msaMarkup = '<li data-state="${state}" value="${row}" title="${msa} (${location})">${msa}</li>';
+		// 	$.template("msaData", msaMarkup);
+		// 	$.tmpl("msaData", data).appendTo("ul#allmsalist");
 			
-			$("li[value='488']").addClass('active');
-			$("li[value='492']").addClass('active');
-			myScript.move_list_items('right','','');
-		});
+		// 	$("li[value='488']").addClass('active');
+		// 	$("li[value='492']").addClass('active');
+		// 	myScript.move_list_items('right','','');
+		// });
 		$(document).on('click', 'ul#allmsalist li, ul#selectmsalist li', function(){
 			if($(this).val() == '488' || $(this).val() == '492')
 			{
@@ -1030,3 +1067,16 @@ jQuery(document).ready(function($){
 		$(".header-right").toggle();
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

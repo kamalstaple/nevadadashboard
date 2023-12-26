@@ -1,6 +1,6 @@
 <?php
 
-include 'model.php';
+// include 'model.php';
 Class portal {
 	//private $MRSITE = 'http://myresearcher.com/dataportal/';
 
@@ -149,6 +149,7 @@ Class portal {
 	
 	public function download($name)
 	{
+	
 		$exp = explode(".",$name);
 		$type = $exp[1];
 

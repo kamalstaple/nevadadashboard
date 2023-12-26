@@ -150,36 +150,7 @@
 
 <script>
 
-				
-		
-	var myScripts = new ( function($) {
-        this.sendAjax = function(param, afterloadback)
-	{
-        $.ajax({
-			data: param,
-			url: "{{route('/mr_portal')}}",
-			cache: false,
-			type: 'Post',
-			dataType: 'json',
-			beforeSend: function(){
-				$(".loader-overlay").show();
-			},
-			success: function(reData, status, xhr) {
-				$(".loader-overlay").hide();
-				afterloadback(reData);
-				
-				// return reData;
-			}
-		});
-				
 	
-	}
-
-
-
-
-           
-    });
 </script>
 @endsection
 

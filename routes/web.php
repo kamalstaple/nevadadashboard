@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NavedaController::class , 'Home'])->name('/');
 Route::get('/economical', [NavedaController::class , 'economical'])->name('/economical');
-Route::get('/map-data', [NavedaController::class , 'mapdata'])->name('/map-data');
+Route::get('/statewide', [NavedaController::class , 'mapdata'])->name('/statewide');
 Route::get('/overview', [NavedaController::class , 'overviewpage'])->name('/overview');
 
 Route::get('/location_comparistion', [NavedaController::class , 'locationcomparistion'])->name('/location_comparistion');
