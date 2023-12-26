@@ -18,7 +18,9 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 			<h1 id="wchCity">{{$statewise->tab}}</h1>
 			<p>Below you will find key statistics for the region you selected. Select one or more indicators from the summary table to access trend data. Additionally, detailed state and county-level reports are available and provide extensive information about the economy at all levels.</p>
 		</div>
-		<div class="elko-right"><a href="index"><img src="img/map-return.jpg"></a></div>
+		<div class="elko-right">
+			<a href="index"><img src="img/map_return.png"></a>
+		</div>
 		<div class="clear"></div>
 		<!-- Indicator Detail Chart Area Start -->
 		<!-- Chart Area Start -->
