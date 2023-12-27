@@ -109,4 +109,67 @@ class NavedaController extends Controller
 	{
 		return view('overview');
 	}
+
+
+
+	public function download(Request $request)
+
+	{
+		
+	
+		$exp = explode(".",$request->name);
+		$type = $exp[1];
+
+		$url = $this->publicPath .'reports/goed/'.$request->name;
+		// $url = $this->MRSITE .'reports/goed/'.$name;
+		$path = 'reports/'.$request->name;
+		
+		$fp = fopen ($path, 'w+'); # open file to write 
+		$ch = curl_init(); # start curl
+		curl_setopt( $ch, CURLOPT_URL, $url );
+
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, false ); 	# set return transfer to false
+		curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10 ); # increase timeout to download big file
+		curl_setopt( $ch, CURLOPT_FILE, $fp ); # write data to local file
+		
+		curl_exec( $ch ); # execute curl
+		curl_close( $ch );
+		fclose( $fp ); # close local file
+		
+		if (filesize($path) > 0)
+		$arrs = array('file' => $request->name);
+		$postDatas = http_build_query($arrs);
+		
+ 		$this->mr_portal('reportD', $postDatas);
+		
+		if(isset($_COOKIE['download_complete']))
+		{
+			unset($_COOKIE['download_complete']);
+		}
+		setcookie("download_complete", "completed", time()+3600 );
+		
+		header("Pragma: public");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Cache-Control: public");
+		
+		if($type == "pdf") {
+			header("Content-Type: application/force-download");
+		} else if($type == "csv"){
+			header("Content-Type: application/vnd.ms-excel");	
+		} else {
+			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		}
+		
+		header("Content-Disposition: attachment; filename=".$request->name);
+		header("Content-Transfer-Encoding: binary");
+		header("Content-Length: " . filesize($path));
+		readfile($path);
+		header('Connection: close');
+		@unlink($path);
+		exit;
+	}
+
+
 }
