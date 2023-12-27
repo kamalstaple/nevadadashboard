@@ -21,11 +21,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
   
-$(document).ready(function(){
-  $('.prior_click').click(function(){
-    $(this).closest('.economic_cards').addClass('active');
+  $(document).ready(function(){
+  $('.economic_cards').click(function(){
+    $(this).addClass('active');
   });
-  $('.remove_list').click(function(){
+  $('.remove_list').click(function(event){
+    event.stopPropagation();
     $(this).closest('.economic_cards').removeClass('active');
   });
 });
