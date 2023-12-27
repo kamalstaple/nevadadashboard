@@ -51,7 +51,7 @@ foreach ($spending->trendList as $chartdata) {
               <p>Welcome to the Nevada Governor’s Office of Economic Development (GOED) data portal. 
                   <br/>
                   <br/>
-                  This page provides useful data and links to get information about Nevada’s economy and its consumers. Click on any of the counties on the map to the right to get information on population, employment, spending and other key market metrics.</p>
+                  This page provides useful data and links to<br> get information about Nevada’s economy<br> and its consumers. Click on any of the <br>counties on the map to the right to get<br> information on population, employment, <br>spending and other key market metrics.</p>
            </div>
         </div>
         <div class="col-lg-8" data-aos="fade-left" data-aos-duration="3000">
@@ -80,7 +80,7 @@ foreach ($spending->trendList as $chartdata) {
                        <p class="text-center mb-0">vs. prior period</p>
                       </div>
                        <div class="prior_list">
-                        <span class="remove_list">x</span>
+                        <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                          <ul>
                           @foreach($population->trendList as $trend)
                           <li class="label_unit">
@@ -127,7 +127,7 @@ foreach ($spending->trendList as $chartdata) {
                         </div>
                         
                         <div class="prior_list">
-                          <span class="remove_list">x</span>
+                          <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                            <ul>
                            @foreach($economical->trendList as $trend)
                           <li class="label_unit">
@@ -173,7 +173,7 @@ foreach ($spending->trendList as $chartdata) {
                         <p class="text-center mb-0">vs. prior period</p>
                   </div>
                         <div class="prior_list">
-                          <span class="remove_list">x</span>
+                          <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                            <ul>
                            @foreach($spending->trendList as $trend)
                           <li class="label_unit">
@@ -215,7 +215,7 @@ foreach ($spending->trendList as $chartdata) {
       <div class="col-md-6" data-aos="zoom-in-down" data-aos-duration="2000">
      <div class="text_block">
        <h4>Nevada Dynamic Data Map</h4>
-       <p>Select on a county on the map above to access key market metrics or click <a href="{{route('/statewide',['city'=>'Nevada' ,'Name'=>'Nevada'])}}" class="link_here">here</a> to obtain data for the entire state.</p>
+       <p>Select on a county on the map above to access key market metrics <br> or click <a href="{{route('/statewide',['city'=>'Nevada' ,'Name'=>'Nevada'])}}" class="link_here">here</a> to obtain data for the entire state.</p>
      </div>
       </div>
       <div class="col-md-6 map-area" data-aos="zoom-in-left" data-aos-duration="3000">
@@ -313,8 +313,10 @@ var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.3
+  fillOpacity: 0.9
 });
+series.set("fill", am5.color("#8bbedf"));
+
 
 // series.bullets.push(function () {
 //   return am5.Bullet.new(root, {
@@ -437,8 +439,10 @@ var series = chart3.series.push(am5xy.SmoothedXLineSeries.new(root3, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.3
+  fillOpacity: 0.9
+ 
 });
+series.set("fill", am5.color("#8bbedf"));
 
 // series.bullets.push(function () {
 //   return am5.Bullet.new(root, {
@@ -563,8 +567,11 @@ var series = chart2.series.push(am5xy.SmoothedXLineSeries.new(root2, {
 
 series.fills.template.setAll({
   visible: true,
-  fillOpacity: 0.3
+  fillOpacity: 0.9
 });
+
+series.set("fill", am5.color("#8bbedf"));
+
 chart2.set("disposable", true);
 // series.bullets.push(function () {
 //   return am5.Bullet.new(root, {

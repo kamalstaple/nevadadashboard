@@ -81,7 +81,7 @@
 		
 		<div class="btn-margin" data-aos="fade-up" data-aos-duration="2000">
         @csrf
-			<a href="javascript:void(0);"><button class="btn" id="generate_report"  >Generate Report</button></a>
+			<a href="javascript:void(0);"><button class="btn" id="generate_report"  >Generate Report<i class="ms-2 fa fa-file-text"></i></button></a>
 		</div>
 		<div class="clear"></div>
 	</section>
