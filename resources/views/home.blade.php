@@ -51,7 +51,7 @@ foreach ($spending->trendList as $chartdata) {
               <p>Welcome to the Nevada Governor’s Office of Economic Development (GOED) data portal. 
                   <br/>
                   <br/>
-                  This page provides useful data and links to get information about Nevada’s economy and its consumers. Click on any of the counties on the map to the right to get information on population, employment, spending and other key market metrics.</p>
+                  This page provides useful data and links to<br> get information about Nevada’s economy<br> and its consumers. Click on any of the <br>counties on the map to the right to get<br> information on population, employment, <br>spending and other key market metrics.</p>
            </div>
         </div>
         <div class="col-lg-8" data-aos="fade-left" data-aos-duration="3000">
@@ -73,7 +73,7 @@ foreach ($spending->trendList as $chartdata) {
                        <p class="text-center mb-0">vs. prior period</p>
                       </div>
                        <div class="prior_list">
-                        <span class="remove_list">x</span>
+                        <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                          <ul>
                           @foreach($population->trendList as $trend)
                           <li class="label_unit">
@@ -114,7 +114,7 @@ foreach ($spending->trendList as $chartdata) {
                         </div>
                         
                         <div class="prior_list">
-                          <span class="remove_list">x</span>
+                          <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                            <ul>
                            @foreach($economical->trendList as $trend)
                           <li class="label_unit">
@@ -155,7 +155,7 @@ foreach ($spending->trendList as $chartdata) {
                         <p class="text-center mb-0">vs. prior period</p>
                   </div>
                         <div class="prior_list">
-                          <span class="remove_list">x</span>
+                          <span class="remove_list"><i class="fa fa-times" aria-hidden="true"></i></span>
                            <ul>
                            @foreach($spending->trendList as $trend)
                           <li class="label_unit">
