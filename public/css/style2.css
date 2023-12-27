@@ -4546,7 +4546,8 @@ table tbody tr td .fa.yellow {
 	line-height: 20px;
 	margin-bottom: 15px;
 	word-wrap: break-word;
-	font-family: 'Fira Sans', sans-serif
+	font-family: 'Fira Sans', sans-serif;
+	color: #000;
 }
 
 .quick-chart-pop .quick-edit-left .info-sec span {

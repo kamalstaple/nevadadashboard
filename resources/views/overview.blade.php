@@ -20,7 +20,7 @@
 			<h4 id="pdfOver">Nevada Overview</h4>
 			<div id="objPdfSpan"><embed id="objPdf" width="100%" height="481" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" alt="pdf" src="pdf/Nevada.pdf#view=FitH"></div>
 			<div class="btn-margin">
-				<a href="pdf/Nevada.pdf" target="_blank" id="overviewPdf"><button class="btn">Download <span id="cityPd">nevada</span> overview report [PDF]</button></a>
+				<a href="pdf/Nevada.pdf" target="_blank" id="overviewPdf"><button class="btn">Download <span id="cityPd">nevada</span> overview report [PDF] <i class="ms-2 fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
 			</div>
 		</div>
 		<div class="clear"></div>

@@ -148,7 +148,7 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
         <!-- Table hint End -->
         <div class="btn-margin">
             <a download href="{{asset('pdf/'.$statewise->tab.'.pdf')}}"><button class="btn elko-btn">Download
-                    {{$statewise->tab}} Overview report [PDF]</button></a>
+                    {{$statewise->tab}} Overview report [PDF] <i class="ms-2 fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
         </div>
         <div class="clear"></div>
     </section>

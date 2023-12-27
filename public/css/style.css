@@ -60,7 +60,17 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
 button#generate_report {
     width: 417px;
 }
-
+#detail-overview {
+    position: relative;
+}
+#detail-overview .dor-right {
+    position: absolute;
+    right: -130px;
+    width: 70%;
+}
+#overviewPdf button.btn {
+    width: 450px !important;
+}
 @media (min-width:992px) {
     .custom_header  .navbar-brand{
         display: none;
@@ -323,6 +333,9 @@ section.nevada_dashboard_tabs_section.pt-3.pb-5 {
     top: -39px;
     background: #95c3e10f;
     z-index: -1;
+}
+.center-area .home-inner button.btn .fa.fa-file-pdf-o{
+    font-size: 20px;
 }
 @media (min-width:767px) {
     .bottom_details + div div:nth-child(1n) canvas.am5-layer-0{
