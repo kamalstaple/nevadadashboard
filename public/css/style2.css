@@ -3787,7 +3787,7 @@ table {
 	font-weight: 400;
 	font-size: 13px;
 	font-family: 'Fira Sans', sans-serif;
-	border-bottom: 2px solid #1f5a7b
+	border-bottom: 2px solid #000;
 }
 
 .elko-table table tbody tr td:first-of-type {
@@ -3939,7 +3939,8 @@ table tbody tr td {
 }
 
 table tbody tr td .fa {
-	font-size: 18px
+	font-size: 18px;
+	margin-left: 3px;
 }
 
 table tbody tr td .fa.fa-circle {
@@ -5308,8 +5309,8 @@ table tbody tr td .fa.yellow {
 	padding: 2px 10px;
 	color: #fff;
 	font-weight: 400;
-	font-size: 13px;
-	font-family: 'Barlow Condensed', sans-serif
+	font-size: 17px;
+	font-family: 'Barlow Condensed', sans-serif;
 }
 
 .dor-left h4,
@@ -5322,7 +5323,7 @@ table tbody tr td .fa.yellow {
 }
 
 .comparison-area .arrow-set {
-	background-color: #0c436a;
+	background-color: #0C436A;
 	color: #fff;
 	width: 30px;
 	text-align: center;
@@ -5462,7 +5463,6 @@ table tbody tr td .fa.yellow {
 		width: 100%
 	}
 }
-
 .center-area .btn-margin #overviewPdf button.btn {
 	width: auto
 }
