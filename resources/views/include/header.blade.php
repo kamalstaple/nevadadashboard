@@ -18,6 +18,8 @@
 
 <script type='text/javascript' src="{{asset('js/jquery.colorbox.js')}}"></script>
 <script type='text/javascript' src="{{asset('js/jquery.popover-1.1.2.js')}}"></script>
+<script type='text/javascript' src="{{asset('js/dataportal.js')}}"></script>
+
 
 
 

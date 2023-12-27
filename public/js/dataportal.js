@@ -9,7 +9,7 @@ var myScript = new ( function($) {
 				
 		$.ajax({
 			data: param,
-			url: "http://localhost:8000/mr_portal",
+			url: "/mr_portal",
 			cache: false,
 			type: 'post',
 			dataType: 'json',
@@ -582,28 +582,28 @@ jQuery(document).ready(function($){
 		const csrfToken = document.querySelector('input[name="_token"]').value;
 
 		param = { 'action':'statewide_data', 'tab'  : city, 'is_arr' : 1, '_token':csrfToken},
-		myScript.sendAjax(param, function(result){
-			res = result.data;
+		// myScript.sendAjax(param, function(result){
+		// 	res = result.data;
 			
-			// console.log(result);
-			// if(result.data.length > 0 && result.result > 0)
-			// {
-			// 	var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
+		// 	// console.log(result);
+		// 	// if(result.data.length > 0 && result.result > 0)
+		// 	// {
+		// 	// 	var rowHtml = '<tr id="row-${IndicatorID}" data-id="${IndicatorID}" data-adjs="${is_adjustment}"><td><div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div></td><td>{{if is_adjustment == 1 }}<i class="fa fa-leaf"></i>{{else}}&nbsp;{{/if}}</td><td class="t-left name" title="${Name}">${Name}</td><td class="location" title="${GeographicAlias}">${GeographicAlias}</td><td>${Date}</td><td>${ValueFormatted}</td><td>${previousValue}</td><td>${priorValue} <i class="fa ${priorPeriod}"></i></td><td>${lastYearValue}</td><td>${priorYValue} <i class="fa ${priorYear}"></i></td><td id="trend-${IndicatorID}" class="trend-line" data-graph="${JSON.stringify(trend)}" style="width: 100px; height: 25px;">Spark</td></tr>';
 				
-			// } else {
-			// 	var rowHtml = '<tr><td colspan="10"></td></tr>';
-			// }
-			// $.template("html-list", rowHtml);
-			// $("tbody#main-table-list").html('');
-			// $.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
-			$(".trend-line").each(function(){
-				data = $(this).attr('data-graph');
-				divID = $(this).attr('id');
+		// 	// } else {
+		// 	// 	var rowHtml = '<tr><td colspan="10"></td></tr>';
+		// 	// }
+		// 	// $.template("html-list", rowHtml);
+		// 	// $("tbody#main-table-list").html('');
+		// 	// $.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
+		// 	$(".trend-line").each(function(){
+		// 		data = $(this).attr('data-graph');
+		// 		divID = $(this).attr('id');
 				
 				
-				myScript.DrawTrend($.parseJSON(data), divID);
-			});
-		});
+		// 		myScript.DrawTrend($.parseJSON(data), divID);
+		// 	});
+		// });
 		
 		$(document).on('click', "tbody#main-table-list .arrow-block", function(event){	
 			event.preventDefault();
@@ -1024,6 +1024,7 @@ jQuery(document).ready(function($){
 	
 	if($("#cityMap").length > 0)
 	{
+		
 		$(".overlay").show();
 		$('#cityMap').load('images/city.svg', function(){
 			$(".overlay").hide();

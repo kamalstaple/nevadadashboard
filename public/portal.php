@@ -206,11 +206,11 @@ Class portal {
 }
 $obj = new portal();
 
-if(isset($_POST['downlaod']) && $_POST['downlaod'] == 1){
-    echo $obj->download_portal();
-} else {
-	echo $obj->get_portal();
+// if(isset($_POST['downlaod']) && $_POST['downlaod'] == 1){
+//     echo $obj->download_portal();
+// } else {
+// 	echo $obj->get_portal();
 
-}
+// }
 
 
