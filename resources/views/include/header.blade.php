@@ -46,6 +46,9 @@
 
   </head>
   <body>
+  <div class="loader-overlay d-none">
+	<div class="loader"><img src="img/main-loader.svg"></div>
+</div>
 
     <header class="custom_header">
       <div class="custom_container">

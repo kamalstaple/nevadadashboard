@@ -1,8 +1,6 @@
 
 
-<div class="loader-overlay dn">
-	<div class="loader"><img src="img/main-loader.svg"></div>
-</div>
+
 
 
 <footer class="custom_footer">

@@ -14,9 +14,11 @@ var myScript = new ( function($) {
 			type: 'post',
 			dataType: 'json',
 			beforeSend: function(){
+				$(".loader-overlay").removeClass('d-none');
 				$(".loader-overlay").show();
 			},
 			success: function(reData, status, xhr) {
+				$(".loader-overlay").addClass('d-none');
 				$(".loader-overlay").hide();
 				
 				afterloadback(reData);
