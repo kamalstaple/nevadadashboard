@@ -62,7 +62,14 @@ foreach ($spending->trendList as $chartdata) {
              <div class="economic_cards population" id="chartdiv">
                 <img src="{{asset('images/population.png')}}" alt="icon" class="card_icon">
                 <span class="economic_type">{{$population->Name}}</span>
-                <h5 class="economic_number">{{$population->valueformated}}</h5>
+                <?php 
+                 $cleaned_value = preg_replace("/[0-9]+/", "", $population->valueformated);
+                 $cleaned_value = str_replace("$", "", $cleaned_value);
+                 $cleaned_value = str_replace(".", " ", $cleaned_value);
+                 ?>
+                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $population->valueformated);}}<span>{{$cleaned_value}}</span></h5>
+                
+                
                 <span class="economic_year">{{$population->Date}}</span>
                 <div class="bottom_details">
                   <div class="prior_click">
@@ -102,7 +109,13 @@ foreach ($spending->trendList as $chartdata) {
               <div class="economic_cards employment" id="chartdiv2">
                  <img src="{{asset('images/employment.png')}}" alt="icon" class="card_icon">
                  <span class="economic_type">{{$economical->Name}}</span>
-                <h5 class="economic_number">{{$economical->valueformated}}</h5>
+                 <?php 
+                 $cleaned_value = preg_replace("/[0-9]+/", "", $economical->valueformated);
+                 $cleaned_value = str_replace("$", "", $cleaned_value);
+                 $cleaned_value = str_replace(".", " ", $cleaned_value);
+                 ?>
+                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $economical->valueformated);}}<span>{{$cleaned_value}}</span></h5>
+                
                 <span class="economic_year">{{$economical->Date}}</span>
                  <div class="bottom_details">
                   <div class="prior_click">
@@ -143,7 +156,12 @@ foreach ($spending->trendList as $chartdata) {
               <div class="economic_cards spending" id="chartdiv3">
                  <img src="{{asset('images/spending.png')}}" alt="icon" class="card_icon">
                  <span class="economic_type">{{$spending->Name}}</span>
-                <h5 class="economic_number">{{$spending->valueformated}}</h5>
+                 <?php 
+                 $cleaned_value = preg_replace("/[0-9]+/", "", $spending->valueformated);
+                 $cleaned_value = str_replace("$", "", $cleaned_value);
+                 $cleaned_value = str_replace(".", " ", $cleaned_value);
+                 ?>
+                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $spending->valueformated);}}<span>{{$cleaned_value}}</span></h5>
                 <span class="economic_year">{{$spending->Date}}</span>
                  <div class="bottom_details">
                   <div class="prior_click">
