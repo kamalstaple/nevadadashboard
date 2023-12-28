@@ -107,15 +107,15 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
                         <td>
                             <div class="arrow-block"><i class="fa fa-angle-right arr-ic"></i></div>
                         </td>
-                       
+
                         @if($tabledata->is_adjustment == 1)
                         <td>
-                      
+
                             <div class="arrow-block"> <i class="fa fa-leaf"></i></div>
                         </td>
                         @else
                         <td>
-                        &nbsp;
+                            &nbsp;
                         </td>
                         @endif
                         <td class="t-left name" title="{{$tabledata->Name}}">{{$tabledata->Name}}</td>
@@ -148,7 +148,8 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
         <!-- Table hint End -->
         <div class="btn-margin">
             <a download href="{{asset('pdf/'.$statewise->tab.'.pdf')}}"><button class="btn elko-btn">Download
-                    {{$statewise->tab}} Overview report [PDF] <i class="ms-2 fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
+                    {{$statewise->tab}} Overview report [PDF] <i class="ms-2 fa fa-file-pdf-o"
+                        aria-hidden="true"></i></button></a>
         </div>
         <div class="clear"></div>
     </section>
@@ -306,50 +307,59 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 </div>
 <div id="_graph_holder" style="display:none;"></div>
 <!-- Tools Menu start -->
-<div style="display:none;" class="tools-menu" id="tools-menu"> 
-	<ul>
-		<li>
-			<a id="quick_chart" href="javascript:void(0);">View Quick Chart <i class="fa fa-angle-double-right"></i></a>
-		</li>
-		<li><a id="add_to_chart" href="javascript:void(0);">Add to Chart <i class="fa fa-angle-double-right"></i></a></li>
-		<li>
-			<a href="javascript:void(0);">Create Report <i class="fa fa-angle-double-right"></i></a>
-			<ul class="tools-second-menu">
-				<li class="tools-menu-heading">Create Report</li>
-				<li class="download_report" type="single"><a href="javascript:void(0);">Current Indicator <i class="fa fa-angle-double-right"></i></a></li>
-				<li><a href="javascript:void(0);">All Indicators <i class="fa fa-angle-double-right"></i></a>
-					<ul class="tools-third-menu">
-						<li class="tools-menu-heading">Full Report</li>
-						<li class="download_report" type="cur"><a href="javascript:void(0)">Current Data Only <i class="fa fa-angle-double-right"></i></a></li>
-						<li class="download_report" type="trl"><a href="javascript:void(0)">Current &amp; Trailing Data <i class="fa fa-angle-double-right"></i></a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a href="javascript:void(0)">Export Data <i class="fa fa-angle-double-right"></i></a>
-			<ul class="tools-second-menu">
-				<li class="tools-menu-heading">Export Data</li>
-				<li>
-					<a href="javascript:void(0)">Current Indicator <i class="fa fa-angle-double-right"></i></a>
-					<ul class="tools-third-menu">
-						<li class="tools-menu-heading">File Format</li>
-						<li class="download_export" rel="single" type="xls" ><a href="javascript:void(0)">Excel Spreadsheet</a> </li>
-						<li class="download_export" rel="single" type="csv" ><a href="javascript:void(0)">.csv File</a> </li>
-						<li class="download_export" rel="single" type="pdf" ><a href="javascript:void(0)">PDF File</a> </li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0)">All Indicators <i class="fa fa-angle-double-right"></i></a>
-					<ul class="tools-third-menu">
-						<li class="tools-menu-heading">File Format</li>
-						<li class="download_export" rel="all" type="xls" ><a href="javascript:void(0)">Excel Spreadsheet</a> </li>
-						<li class="download_export" rel="all" type="csv" ><a href="javascript:void(0)">.csv File</a> </li>
-					</ul>
-				</li>
-			</ul>
-		</li>														
-	</ul>
+<div style="display:none;" class="tools-menu" id="tools-menu">
+    <ul>
+        <li>
+            <a id="quick_chart" href="javascript:void(0);">View Quick Chart <i class="fa fa-angle-double-right"></i></a>
+        </li>
+        <li><a id="add_to_chart" href="javascript:void(0);">Add to Chart <i class="fa fa-angle-double-right"></i></a>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Create Report <i class="fa fa-angle-double-right"></i></a>
+            <ul class="tools-second-menu">
+                <li class="tools-menu-heading">Create Report</li>
+                <li class="download_report" type="single"><a href="javascript:void(0);">Current Indicator <i
+                            class="fa fa-angle-double-right"></i></a></li>
+                <li><a href="javascript:void(0);">All Indicators <i class="fa fa-angle-double-right"></i></a>
+                    <ul class="tools-third-menu">
+                        <li class="tools-menu-heading">Full Report</li>
+                        <li class="download_report" type="cur"><a href="javascript:void(0)">Current Data Only <i
+                                    class="fa fa-angle-double-right"></i></a></li>
+                        <li class="download_report" type="trl"><a href="javascript:void(0)">Current &amp; Trailing Data
+                                <i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0)">Export Data <i class="fa fa-angle-double-right"></i></a>
+            <ul class="tools-second-menu">
+                <li class="tools-menu-heading">Export Data</li>
+                <li>
+                    <a href="javascript:void(0)">Current Indicator <i class="fa fa-angle-double-right"></i></a>
+                    <ul class="tools-third-menu">
+                        <li class="tools-menu-heading">File Format</li>
+                        <li class="download_export" rel="single" type="xls"><a href="javascript:void(0)">Excel
+                                Spreadsheet</a> </li>
+                        <li class="download_export" rel="single" type="csv"><a href="javascript:void(0)">.csv File</a>
+                        </li>
+                        <li class="download_export" rel="single" type="pdf"><a href="javascript:void(0)">PDF File</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">All Indicators <i class="fa fa-angle-double-right"></i></a>
+                    <ul class="tools-third-menu">
+                        <li class="tools-menu-heading">File Format</li>
+                        <li class="download_export" rel="all" type="xls"><a href="javascript:void(0)">Excel
+                                Spreadsheet</a> </li>
+                        <li class="download_export" rel="all" type="csv"><a href="javascript:void(0)">.csv File</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
 <!-- Tools Menu End -->
 
@@ -386,93 +396,96 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 </div>
 </script>
 <script type="text/x-jquery-tmpl" id="template-list-view-name">
-	
-</script> 
+
+</script>
 <div id="main-chart-legend-div"></div>
 
 <div id='view-quick-chart' style="display:none;">
-	<div class="popup-area quick-chart-pop">
-		<div class="blue-bar">
-			<div class="pop-title">quick chart</div>
-		</div>
-		<div class="white-bar">
-			<div class="body-title quick-use" id="ind_name">${NameAlias}</div>
-			<span class="quick-pop-icon add-to-main"><i class="fa fa-plus"></i></span>
-			<span class="quick-pop-icon quick-download">
-				<i class="fa fa-download"></i>
-				<div class="quick-download-menu">
-				   <div class="heading">Export data</div>
-				   <ul>
-					   <li class="q_download_export" rel="single" type="xls" ><a href="javascript:void(0)">Excel Spreadsheet</a> </li>
-					   <li class="q_download_export" rel="single" type="csv" ><a href="javascript:void(0)">.csv File</a> </li>
-					   <li class="q_download_export" rel="single" type="pdf" ><a href="javascript:void(0)">PDF File</a> </li>
-					
-				   </ul>
-			   </div>
-			</span>
-			<div class="clr"></div>
-			<div class="quick-edit-left" id="show-quick-chart-left">
-				
-			</div>
-			<div class="quick-edit-right">
-				<div class="quick-chart-map">
-					<div id="quick_graph" data-graph=""></div>
-					<div class="map-show-scroll">
-						<div><input type="checkbox" id="show_scroll"></div>
-						<div class="input-text">Show scrollbar</div>
-						<div class="clr"></div>
-					</div>
-				</div>
-				<!-- Table start -->
-				<div class="quick-chart-table">
-					<table cellpadding="0" cellspacing="0" width="100%">
-						<thead>
-							<tr>
-								<th colspan="4" class="blue-bg-light">Current</th>
-								<th colspan="4" class="orange-bg-light">Trailing 12 months</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="4" class="no-padding">
-									<table cellpadding="0" cellspacing="0" width="100%">
-										<thead>
-											<tr>
-												<th class="blue-bg-dark"></th>
-												<th class="blue-bg-dark">Value</th>
-												<th class="blue-bg-dark">MoM<br>% CHG</th>
-												<th class="blue-bg-dark">YoY<br>% CHG</th>
-											</tr>
-										</thead>
-										<tbody id="current-monthly">
-												
-										</tbody>
-									</table>
-								</td>
-								<td colspan="4" class="no-padding">
-									<table cellpadding="0" cellspacing="0" width="100%">
-										<thead>
-											<tr>
-												<th class="orange-bg-dark"></th>
-												<th class="orange-bg-dark">Value</th>
-												<th class="orange-bg-dark">MoM<br>% CHG</th>
-												<th class="orange-bg-dark">YoY<br>% CHG</th>
-											</tr>
-										</thead>
-										<tbody id="aggregate-monthly">
-												
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- Table end -->
-			</div>
-			<div class="clr"></div>
-		</div>
-	</div>
+    <div class="popup-area quick-chart-pop">
+        <div class="blue-bar">
+            <div class="pop-title">quick chart</div>
+        </div>
+        <div class="white-bar">
+            <div class="body-title quick-use" id="ind_name">${NameAlias}</div>
+            <span class="quick-pop-icon add-to-main"><i class="fa fa-plus"></i></span>
+            <span class="quick-pop-icon quick-download">
+                <i class="fa fa-download"></i>
+                <div class="quick-download-menu">
+                    <div class="heading">Export data</div>
+                    <ul>
+                        <li class="q_download_export" rel="single" type="xls"><a href="javascript:void(0)">Excel
+                                Spreadsheet</a> </li>
+                        <li class="q_download_export" rel="single" type="csv"><a href="javascript:void(0)">.csv File</a>
+                        </li>
+                        <li class="q_download_export" rel="single" type="pdf"><a href="javascript:void(0)">PDF File</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </span>
+            <div class="clr"></div>
+            <div class="quick-edit-left" id="show-quick-chart-left">
+
+            </div>
+            <div class="quick-edit-right">
+                <div class="quick-chart-map">
+                    <div id="quick_graph" data-graph=""></div>
+                    <div class="map-show-scroll">
+                        <div><input type="checkbox" id="show_scroll"></div>
+                        <div class="input-text">Show scrollbar</div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+                <!-- Table start -->
+                <div class="quick-chart-table">
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="blue-bg-light">Current</th>
+                                <th colspan="4" class="orange-bg-light">Trailing 12 months</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" class="no-padding">
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="blue-bg-dark"></th>
+                                                <th class="blue-bg-dark">Value</th>
+                                                <th class="blue-bg-dark">MoM<br>% CHG</th>
+                                                <th class="blue-bg-dark">YoY<br>% CHG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="current-monthly">
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td colspan="4" class="no-padding">
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="orange-bg-dark"></th>
+                                                <th class="orange-bg-dark">Value</th>
+                                                <th class="orange-bg-dark">MoM<br>% CHG</th>
+                                                <th class="orange-bg-dark">YoY<br>% CHG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="aggregate-monthly">
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Table end -->
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
 </div>
 <!--Quick Chart Tmpl-->
 <script id="quick-chart-left" type="text/x-jquery-tmpl">
@@ -516,7 +529,7 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 		<td data-raw-value="${m}">${m}</td>
 		<td data-raw-value="${y}">${y}</td>
 	</tr>
-</script> 
+</script>
 <script type="text/x-jquery-tmpl" id="template-aggregate-monthly">
 	<tr>
 		<td>${f_Date}</td>
@@ -524,12 +537,10 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 		<td data-raw-value="${am}">${am}</td>
 		<td data-raw-value="${ay}">${ay}</td>
 	</tr>
-</script> 
+</script>
 <script type="text/x-jquery-tmpl" id="template-list-view-name">
-	
-</script> 
+
+</script>
 
 
 @endsection
-
-

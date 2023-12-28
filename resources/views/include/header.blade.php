@@ -31,7 +31,18 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
+    <style>
+	.map-area{}
+	.map-area polygon:hover{ fill: #0c436a; cursor: pointer; }
+	.map-area polygon.active{ fill: #1f5a7b; cursor: pointer; }
+	.map-area polygon.disable:hover{ fill: #2288c9; cursor: auto; }
+	.name-text polygon:hover{ fill: #000000; }
+	.name-text path:hover{ fill: #000000; }
+	.demo-hover{ fill: #1f5a7b; cursor: pointer; }
+	.name-text:hover polygon{ fill: #FFFFFF; }
+	.name-text:hover path{ fill: #FFFFFF; }
+	.name-text:hover rect{ fill: #FFFFFF; }
+	</style>
 
   </head>
   <body>
@@ -54,16 +65,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{route('/')}}"><span>Economic Performance Data</span></a>
+                  <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{route('/')}}">Economic Performance Data</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {{ request()->is('economical') ? 'active' : '' }}" href="{{route('/economical')}}"><span>Economic development Data</span></a>
+                  <a class="nav-link {{ request()->is('economical') ? 'active' : '' }}" href="{{route('/economical')}}">Economic development Data</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link {{ request()->is('location_comparistion') ? 'active' : '' }}" href="{{route('/location_comparistion')}}"><span>location comparison</span></a>
+                <a class="nav-link {{ request()->is('location_comparistion') ? 'active' : '' }}" href="{{route('/location_comparistion')}}">location comparison</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link {{ request()->is('overview') ? 'active' : '' }}" href="{{route('/overview')}}"><span>Detailed overview reports</span></a>
+                <a class="nav-link {{ request()->is('overview') ? 'active' : '' }}" href="{{route('/overview')}}">Detailed overview reports</a>
                 </li>
               </ul>
             </div>
