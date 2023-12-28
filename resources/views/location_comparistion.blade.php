@@ -85,7 +85,7 @@
 		<div class="btn-margin">
             @csrf
 			<button class="btn dwn-loc" type="pdf">Download report [PDF] <i class="ms-2 fa fa-file-pdf-o" aria-hidden="true"></i></button>
-			<button class="btn dwn-loc" type="xls">Download Data [EXCEL] <i class="ms-2 fa fa-download" aria-hidden="true"></i></button>
+			<button class="btn dwn-loc" type="xls">Download Data [EXCEL] <i class="ms-2 fa fa-file-excel-o" aria-hidden="true"></i></button>
 		</div>
 		
 		<!-- Notes Start -->
