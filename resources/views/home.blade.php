@@ -88,18 +88,7 @@ foreach ($spending->trendList as $chartdata) {
                             <b class="unit">{{$trend->f_value}}</b>
                           </li>
                           @endforeach
-                          <!-- <li class="label_unit">
-                            <span class="year">2007</span>
-                            <b class="unit">2.50 M</b>
-                          </li> -->
-                          <!-- <li class="label_unit">
-                            <span class="year">2008</span>
-                            <b class="unit">2.50 M</b>
-                          </li> -->
-                          <!-- <li class="label_unit">
-                            <span class="year">2009</span>
-                            <b class="unit">2.50 M</b>
-                          </li> -->
+                         
                          </ul>
                        </div>
                 </div>
@@ -135,18 +124,7 @@ foreach ($spending->trendList as $chartdata) {
                             <b class="unit">{{$trend->f_value}}</b>
                           </li>
                           @endforeach
-                            <!-- <li class="label_unit">
-                              <span class="year">2007</span>
-                              <b class="unit">2.50 M</b>
-                            </li> -->
-                            <!-- <li class="label_unit">
-                              <span class="year">2008</span>
-                              <b class="unit">2.50 M</b>
-                            </li> -->
-                            <!-- <li class="label_unit">
-                              <span class="year">2009</span>
-                              <b class="unit">2.50 M</b>
-                            </li> -->
+                         
                            </ul>
                          </div>
                  </div>
@@ -181,22 +159,7 @@ foreach ($spending->trendList as $chartdata) {
                             <b class="unit">{{$trend->f_value}}</b>
                           </li>
                           @endforeach
-                            <!-- <li class="label_unit">
-                              <span class="year">2006</span>
-                              <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
-                              <span class="year">2007</span>
-                              <b class="unit">2.50 M</b>
-                            </li>
-                            <li class="label_unit">
-                              <span class="year">2008</span>
-                              <b class="unit">2.50 M</b>
-                            </li> -->
-                            <!-- <li class="label_unit">
-                              <span class="year">2009</span>
-                              <b class="unit">2.50 M</b>
-                            </li> -->
+                            
                            </ul>
                          </div>
                  </div>
@@ -234,46 +197,35 @@ foreach ($spending->trendList as $chartdata) {
 <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
-<!-- Chart code -->
-<script>
 
+<script>
+  
 am5.ready(function() {
 
 
-// Create root element
-// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+
 var root = am5.Root.new("chartdiv");
 root._logo.dispose();
 
-// root.htmlElement.classList.add("your-class-name");
 
-// Set themes
-// https://www.amcharts.com/docs/v5/concepts/themes/
 root.setThemes([
   am5themes_Animated.new(root)
 ]);
 
 
-// Create chart
-// https://www.amcharts.com/docs/v5/charts/xy-chart/
 var chart = root.container.children.push(am5xy.XYChart.new(root, {
  
   paddingLeft: 0
 }));
 
-// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-// var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
-//   behavior: "none"
-// }));
-// cursor.lineY.set("visible", false);
 
 
 
 
 
 
-// Create axes
-// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+
+
 var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
   maxDeviation: 0.5,
   baseInterval: {
@@ -282,7 +234,7 @@ var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
   },
   renderer: am5xy.AxisRendererX.new(root, {
     minGridDistance: 80,
-    // minorGridEnabled: true,
+    
     pan: "zoom"
   }),
   tooltip: am5.Tooltip.new(root, {})
@@ -298,8 +250,6 @@ var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
 root.interfaceColors.set("grid",);
 
 
-// Add series
-// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var series = chart.series.push(am5xy.SmoothedXLineSeries.new(root, {
   name: "Series",
   xAxis: xAxis,
@@ -318,34 +268,17 @@ series.fills.template.setAll({
 series.set("fill", am5.color("#8bbedf"));
 
 
-// series.bullets.push(function () {
-//   return am5.Bullet.new(root, {
-//     locationY: 0,
-//     sprite: am5.Circle.new(root, {
-//       radius: 4,
-//       stroke: root.interfaceColors.get("background"),
-//       strokeWidth: 2,
-//       fill: series.get("fill")
-//     })
-//   });
-// });
 
-
-// Add scrollbar
-// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-// chart.set("scrollbarX", am5.Scrollbar.new(root, {
-//   orientation: "horizontal"
-// }));
 
 var chartdata = JSON.parse('<?php echo json_encode($populationchart); ?>');
 
 console.log(chartdata);
-// var data = generateDatas(50);
+
 
 
 // Disable x-axis and y-axis labels
 xAxis.set("renderer.labels.template.disabled", true);
-// xAxis.set("renderer.grid.template.strokeWidth" , 0);
+
 xAxis.set("visible", false);
 
 yAxis.set("renderer.labels.template.disabled", true);
@@ -362,42 +295,30 @@ yAxis.set("visible", false);
 chart.appear(1000, 100);
 
 }); // end am5.ready()
-</script>
-   
 
-<script>
 
 am5.ready(function() {
 
-
-// Create root element
-// https://www.amcharts.com/docs/v5/getting-started/#Root_element
 var root3 = am5.Root.new("chartdiv3");
 root3._logo.dispose();
 
 
-// Set themes
-// https://www.amcharts.com/docs/v5/concepts/themes/
+
 root3.setThemes([
   am5themes_Animated.new(root3)
 ]);
 
 
-// Create chart
-// https://www.amcharts.com/docs/v5/charts/xy-chart/
 var chart3 = root3.container.children.push(am5xy.XYChart.new(root3, {
   paddingLeft: 0
 }));
 
-// Add cursor
-// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
 
 
 
 
 
-// Create axes
-// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+
 var xAxis3 = chart3.xAxes.push(am5xy.DateAxis.new(root3, {
   maxDeviation: 0.5,
   baseInterval: {
@@ -405,16 +326,14 @@ var xAxis3 = chart3.xAxes.push(am5xy.DateAxis.new(root3, {
     count: 1
   },
   renderer: am5xy.AxisRendererX.new(root3, {
-    // minGridDistance: 80,
-    // minorGridEnabled: true,
+
     pan: "zoom"
   }),
   tooltip: am5.Tooltip.new(root3, {})
 }));
-// xAxis3.get("renderer.grid.template").set("disabled", true);
-// xAxis.get("renderer.grid.template").set("disabled", true);
+
 var yAxis3 = chart3.yAxes.push(am5xy.ValueAxis.new(root3, {
-  // maxDeviation: 1,
+
   renderer: am5xy.AxisRendererY.new(root3, {
     pan: "zoom"
   })
@@ -422,10 +341,7 @@ var yAxis3 = chart3.yAxes.push(am5xy.ValueAxis.new(root3, {
 root3.interfaceColors.set("grid",);
 
 
-// yAxis3.get("renderer.grid.template").set("disabled", true);
 
-// Add series
-// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var series = chart3.series.push(am5xy.SmoothedXLineSeries.new(root3, {
   name: "Series",
   xAxis: xAxis3,
@@ -444,24 +360,9 @@ series.fills.template.setAll({
 });
 series.set("fill", am5.color("#8bbedf"));
 
-// series.bullets.push(function () {
-//   return am5.Bullet.new(root, {
-//     locationY: 0,
-//     sprite: am5.Circle.new(root, {
-//       radius: 4,
-//       stroke: root.interfaceColors.get("background"),
-//       strokeWidth: 2,
-//       fill: series.get("fill")
-//     })
-//   });
-// });
 
 
-// Add scrollbar
-// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-// chart.set("scrollbarX", am5.Scrollbar.new(root, {
-//   orientation: "horizontal"
-// }));
+
 
 
 
@@ -470,11 +371,11 @@ var chartdata = JSON.parse('<?php echo json_encode($economicalchart); ?>');
 console.log(chartdata);
 
 xAxis3.set("renderer.labels.template.disabled", true);
-// xAxis.set("renderer.grid.template.strokeWidth ", 0);
+
 xAxis3.set("visible", false);
 
 yAxis3.set("renderer.labels.template.disabled", true);
-// yAxis.set("renderer.grid.template.strokeWidth ", 0);
+
 yAxis3.set("visible", false);
 
 
@@ -488,45 +389,30 @@ yAxis3.set("visible", false);
 
   chart3.get("background").set("fillOpacity", 0);
 
-// Make stuff animate on load
-// https://www.amcharts.com/docs/v5/concepts/animations/
+
 series.appear(1000);
 chart3.appear(1000, 100);
 
-}); // end am5.ready()
-</script>
-<script>
+}); 
+
 am5.ready(function() {
 
 
-// Create root element
-// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+
 var root2 = am5.Root.new("chartdiv2");
 
 root2._logo.dispose();
 
-// Set themes
-// https://www.amcharts.com/docs/v5/concepts/themes/
 root2.setThemes([
   am5themes_Animated.new(root2)
 ]);
 
 
-// Create chart
-// https://www.amcharts.com/docs/v5/charts/xy-chart/
 var chart2 = root2.container.children.push(am5xy.XYChart.new(root2, {
   paddingLeft: 0
 }));
 
-// Add cursor
-// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
 
-
-
-
-
-// Create axes
-// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
 var xAxis2 = chart2.xAxes.push(am5xy.DateAxis.new(root2, {
   maxDeviation: 0.5,
   baseInterval: {
@@ -534,26 +420,20 @@ var xAxis2 = chart2.xAxes.push(am5xy.DateAxis.new(root2, {
     count: 1
   },
   renderer: am5xy.AxisRendererX.new(root2, {
-    // minGridDistance: 80,
-    // minorGridEnabled: true,
+   
     pan: "zoom"
   }),
   tooltip: am5.Tooltip.new(root2, {})
 }));
-// xAxis2.get("renderer.grid.template").set("disabled", true);
-// xAxis.get("renderer.grid.template").set("disabled", true);
+
 var yAxis2 = chart2.yAxes.push(am5xy.ValueAxis.new(root2, {
-  // maxDeviation: 1,
+
   renderer: am5xy.AxisRendererY.new(root2, {
     pan: "zoom"
   })
 }));
 root2.interfaceColors.set("grid",);
 
-// yAxis2.get("renderer.grid.template").set("disabled", true);
-
-// Add series
-// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var series = chart2.series.push(am5xy.SmoothedXLineSeries.new(root2, {
   name: "Series",
   xAxis: xAxis2,
@@ -573,24 +453,9 @@ series.fills.template.setAll({
 series.set("fill", am5.color("#8bbedf"));
 
 chart2.set("disposable", true);
-// series.bullets.push(function () {
-//   return am5.Bullet.new(root, {
-//     locationY: 0,
-//     sprite: am5.Circle.new(root, {
-//       radius: 4,
-//       stroke: root.interfaceColors.get("background"),
-//       strokeWidth: 2,
-//       fill: series.get("fill")
-//     })
-//   });
-// });
 
 
-// Add scrollbar
-// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
-// chart.set("scrollbarX", am5.Scrollbar.new(root, {
-//   orientation: "horizontal"
-// }));
+
 
 
 
@@ -599,11 +464,11 @@ var chartdata = JSON.parse('<?php echo json_encode($economicalchart); ?>');
 console.log(chartdata);
 
 xAxis2.set("renderer.labels.template.disabled", true);
-// xAxis.set("renderer.grid.template.strokeWidth ", 0);
+
 xAxis2.set("visible", false);
 
 yAxis2.set("renderer.labels.template.disabled", true);
-// yAxis.set("renderer.grid.template.strokeWidth ", 0);
+
 
 yAxis2.set("visible", false);
 
@@ -614,7 +479,7 @@ yAxis2.set("visible", false);
     width: root2.innerWidth,
     height: root2.innerHeight,
     fillOpacity: 1 ,
-    strokeWidth :0// Make it transparent
+    strokeWidth :0
   }));
 
 
@@ -622,12 +487,10 @@ xAxis.get("grid").set("disabled", true);
   chart2.get("background").set("strokeWidth", 0);
 
 
-// Make stuff animate on load
-// https://www.amcharts.com/docs/v5/concepts/animations/
 series.appear(1000);
 chart2.appear(1000, 100);
 
-}); // end am5.ready()
+}); 
 </script>
 
    

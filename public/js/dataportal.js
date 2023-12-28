@@ -342,14 +342,73 @@ var myScript = new ( function($) {
 		param = { 'action':'main_grid_data', 'ids': indicators, 'is_arr' : 1 , '_token':csrfToken},
 		console.log(param);
 
-		myScript.sendAjax(param, function(data){
+		// myScript.sendAjax(param, function(data){
+		// 	$('#thegrid').html('');
+		// 	// console.log(data.data.rows);
+		// 	const names = data.data.names;
+		// 	const rows = data.data.rows;
+		// 	$('#template-list-view-name').tmpl(data.data).appendTo('#thegrid');
+		// 	$(".chart-inner #box-areas").hide();
+		// 	$(".chart-inner .chart-place").hide('slow', function(){
+		// 		$(".chart-inner #thegrid-body").show();
+		// 	});
+		// });
+		myScript.sendAjax(param, function(data) {
 			$('#thegrid').html('');
-			$('#template-list-view-name').tmpl(data.data).appendTo('#thegrid');
-			$(".chart-inner #box-areas").hide();
-			$(".chart-inner .chart-place").hide('slow', function(){
-				$(".chart-inner #thegrid-body").show();
-			});
+			console.log(data);
+		
+		
+				const names = data.data.name.map(item => item.name);
+				const rows = data.data.rows;
+		
+				let namesHeaderHTML = '<tr><th class="text-start">Date</th>';
+				names.forEach(name => {
+					namesHeaderHTML += `<th>${name}</th>`;
+				});
+				namesHeaderHTML += '</tr>';
+		
+				let rowsHTML = '';
+				rows.forEach(row => {
+					rowsHTML += '<tr>';
+					rowsHTML += `<td>${row.Date}</td>`;
+		
+					// Iterate through each property of the row object
+					for (const prop in row) {
+						if (prop !== 'Date') { // Exclude 'Date' property
+							rowsHTML += `<td>${row[prop]}</td>`;
+						}
+					}
+		
+					rowsHTML += '</tr>';
+				});
+		
+				const htmlString = `
+					<div class="top-head-tb">
+						<table cellspacing="0" cellpadding="0" class="list-vie-crt">
+							<thead id="list-view-names">
+								${namesHeaderHTML}
+							</thead>
+						</table>
+					</div>
+					<div class="cont-body-tb">
+						<table cellspacing="0" cellpadding="0" class="list-vie-crt">
+							<tbody id="list-view-data">
+								${rowsHTML}
+							</tbody>
+						</table>
+					</div>
+				`;
+		
+				$('#thegrid').append(htmlString);
+		
+				$(".chart-inner #box-areas").hide();
+				$(".chart-inner .chart-place").hide('slow', function() {
+					$(".chart-inner #thegrid-body").show();
+				});
+			
 		});
+		
+		
 	}
 	
 	this.createChart = function(){
@@ -598,13 +657,13 @@ jQuery(document).ready(function($){
 		// 	// $.template("html-list", rowHtml);
 		// 	// $("tbody#main-table-list").html('');
 		// 	// $.tmpl("html-list", result.data).appendTo("tbody#main-table-list");
-		// 	$(".trend-line").each(function(){
-		// 		data = $(this).attr('data-graph');
-		// 		divID = $(this).attr('id');
+			$(".trend-line").each(function(){
+				data = $(this).attr('data-graph');
+				divID = $(this).attr('id');
 				
 				
-		// 		myScript.DrawTrend($.parseJSON(data), divID);
-		// 	});
+				myScript.DrawTrend($.parseJSON(data), divID);
+			});
 		// });
 		
 		$(document).on('click', "tbody#main-table-list .arrow-block", function(event){	
@@ -1070,6 +1129,32 @@ jQuery(document).ready(function($){
 		$(".header-right").toggle();
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

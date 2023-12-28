@@ -525,6 +525,9 @@ $tabledatas = json_decode($statewide[0]['data'])->data;
 		<td data-raw-value="${ay}">${ay}</td>
 	</tr>
 </script> 
+<script type="text/x-jquery-tmpl" id="template-list-view-name">
+	
+</script> 
 
 
 @endsection
