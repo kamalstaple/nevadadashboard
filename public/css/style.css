@@ -36,7 +36,6 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
     margin: auto;
     padding: 0px 15px;
  }
-.dashboard_tabs.nav-pills .nav-item .nav-link,
 .custom_header .nav-item .nav-link{
     background-color: #53565a;
     font-size: 18px;
@@ -47,6 +46,8 @@ section.nevada_dashboard_tabs_section div#pills-tabContent{
     text-align: center;
     padding: 15px 30px;
     width: 258px;
+    position: relative;
+    overflow: hidden;
 }
 .custom_header .navbar-toggler:focus{
     outline: none;
@@ -76,11 +77,25 @@ button#generate_report {
         display: none;
     }
 }
-.dashboard_tabs.nav-pills .nav-item .nav-link.active,
 .custom_header .nav-item .nav-link.active,
 .custom_header .nav-item .nav-link:hover{
-    background-color: #f1bf3f;
+    /* background-color: #f1bf3f; */
     color: #424242;
+    transition: all .5s ease-in-out;
+}
+.custom_header .nav-item .nav-link:hover:after,
+.custom_header .nav-item .nav-link.active:after{
+    left: 0px;
+}
+.custom_header .nav-item .nav-link:after{
+    content: '';
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    left: -258px;
+    background: #f1bf3f;
+    position: absolute;
+    transition: all .5s ease-in-out;
 }
 .nevada_economic_highlights .text_block h3{
     font-size: 45px;
@@ -88,6 +103,10 @@ button#generate_report {
     color: #0c436a;
     font-weight: 600;
     padding-bottom: 40px;
+}
+.custom_header .nav-item .nav-link span{
+    position: relative;
+    z-index: 1;
 }
 .right_nevada_economic h4 {
     font-size: 24px;
@@ -104,6 +123,13 @@ button#generate_report {
     background-color: #f5f5f5;
     padding: 15px;
     min-height: 298px;
+    cursor: pointer;
+    top: 0px;
+    transition: all 0.3s ease-in-out;
+}
+.economic_cards:hover {
+    top: -10px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.3);
 }
 .right_nevada_economic {
     padding-top: 70px;
@@ -170,14 +196,14 @@ span.economic_year {
 .arrow span.dot_circle {
     height: 25px;
     width: 25px;
-    background: #fff;
+    background: #000;
     border-radius: 50%;
     font-size: 0px;
 }
 .arrow span {
     font-size: 47px;
     line-height: 20px;
-    color: #ffffff;
+    color: #000;
     text-align: center;
     display: block;
     padding-bottom: 15px;
@@ -207,6 +233,27 @@ span.economic_year {
     top: 65px;
     bottom: -7px;
 }
+/* .right_nevada_economic:before {
+    position: absolute;
+    left: -15px;
+    content: '';
+    top: 65px;
+    width: 3px;
+    bottom: -7px;
+    background:linear-gradient(90deg, #e2531f 50%, transparent 50%), linear-gradient(90deg, transparent 50%, transparent 50%), linear-gradient(0deg, #e2531f 50%, transparent 50%), linear-gradient(0deg, #e2531f 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px;
+    background-position: 0px 0px, 200px 100px, 0px 100px, 200px 0px;
+    animation: border-dance 4s infinite linear;
+}
+@keyframes border-dance {
+    0% {
+      background-position: 0px 0px, 300px 116px, 0px 150px, 216px 0px;
+    }
+    100% {
+      background-position: 300px 0px, 0px 116px, 0px 0px, 216px 150px;
+    }
+  } */
 .custom_footer .custom_container p{
     font-family: 'Fira Sans', sans-serif;  
     padding: 15px;
@@ -320,11 +367,12 @@ section.nevada_dashboard_tabs_section.pt-3.pb-5 {
 }
 .bottom_details .arrow img {
     margin-right: 10px;
+    filter: brightness(0%);
 }
 .economic_cards.active {
     border: 1px solid;
 }
-.bottom_details:after {
+/* .bottom_details:after {
     content: '';
     position: absolute;
     left: -15px;
@@ -333,17 +381,27 @@ section.nevada_dashboard_tabs_section.pt-3.pb-5 {
     top: -39px;
     background: #95c3e10f;
     z-index: -1;
-}
+} */
 .center-area .home-inner button.btn .fa.fa-file-pdf-o{
     font-size: 20px;
 }
+/* chart */
+.map-area polygon:hover{ fill: #0c436a; cursor: pointer; }
+.map-area polygon.active{ fill: #1f5a7b; cursor: pointer; }
+.map-area polygon.disable:hover{ fill: #2288c9; cursor: auto; }
+.name-text polygon:hover{ fill: #000000; }
+.name-text path:hover{ fill: #000000; }
+.demo-hover{ fill: #1f5a7b; cursor: pointer; }
+.name-text:hover polygon{ fill: #FFFFFF; }
+.name-text:hover path{ fill: #FFFFFF; }
+.name-text:hover rect{ fill: #FFFFFF; }
+/* chart */
 @media (min-width:767px) {
     .bottom_details + div div:nth-child(1n) canvas.am5-layer-0{
         width: 110% !important;
     }
 }
 @media (max-width:1200px) {
-    .dashboard_tabs.nav-pills .nav-item .nav-link,
     .custom_header .nav-item .nav-link{
         font-size: 17px;
         padding: 10px 25px;
@@ -352,7 +410,7 @@ section.nevada_dashboard_tabs_section.pt-3.pb-5 {
 }
 
 @media (max-width:992px) {
-    .dashboard_tabs.nav-pills .nav-item .nav-link {
+    .custom_header .nav-item .nav-link {
         font-size: 15px;
         padding: 10px;
     }
@@ -364,11 +422,11 @@ section.nevada_dashboard_tabs_section.pt-3.pb-5 {
     .row.nevada_economic_highlights p br {
         display: none;
     }
-    .dashboard_tabs.nav-pills .nav-item {
+    .custom_header .nav-item .nav-link {
        width: 100%;
        margin-bottom: 10px;
     }
-    .dashboard_tabs.nav-pills .nav-item .nav-link{
+    .custom_header .nav-item .nav-link .nav-link{
         width: 100%;
     }
     .economic_cards{
