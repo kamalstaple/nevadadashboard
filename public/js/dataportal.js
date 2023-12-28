@@ -524,22 +524,22 @@ jQuery(document).ready(function($){
 	
 	if($("#portal-home").length > 0)
 	{
-		param = { 'action':'home' },
-		myScript.sendAjax(param, function(result){
-			var rowHtml = '<li class="${cls_name}-open" data-has="${cls_name}" data-graph="${trend}"><div class="yellow-box"><span class="eco-icon  ${cls_name}"></span></div><h2>${Name}</h2><h1>${valueformated}</h1><h4>${Date}</h4><div class="show-result ${sign}"><span>${prior}</span></div><h5>vs. prior period</h5><div class="tile-pop ${cls_name}-opened dn"><div class="tile-cross"><i class="fa fa-times"></i></div><h1>Nevada ${Name}</h1><div class="graph-listing"><ul>{{each(i, key) trendList}}<li><div class="year">${F_Date}</div><div class="value">${f_value}</div><div class="clear"></div></li>{{/each}}</ul></div><div class="graph-chart" id="${cls_name}-chart"><img src="img/${cls_name}-chart.png"></div><div class="source">Source: ${source}</div><div class="clear"></div></div></li>';
+		// param = { 'action':'home' },
+		// myScript.sendAjax(param, function(result){
+		// 	var rowHtml = '<li class="${cls_name}-open" data-has="${cls_name}" data-graph="${trend}"><div class="yellow-box"><span class="eco-icon  ${cls_name}"></span></div><h2>${Name}</h2><h1>${valueformated}</h1><h4>${Date}</h4><div class="show-result ${sign}"><span>${prior}</span></div><h5>vs. prior period</h5><div class="tile-pop ${cls_name}-opened dn"><div class="tile-cross"><i class="fa fa-times"></i></div><h1>Nevada ${Name}</h1><div class="graph-listing"><ul>{{each(i, key) trendList}}<li><div class="year">${F_Date}</div><div class="value">${f_value}</div><div class="clear"></div></li>{{/each}}</ul></div><div class="graph-chart" id="${cls_name}-chart"><img src="img/${cls_name}-chart.png"></div><div class="source">Source: ${source}</div><div class="clear"></div></div></li>';
 			
-			$.template("html-list", rowHtml);
-			$("ul#home-list").html('');
+		// 	$.template("html-list", rowHtml);
+		// 	$("ul#home-list").html('');
 			
-			$.tmpl("html-list", result.data).appendTo("ul#home-list");
+		// 	$.tmpl("html-list", result.data).appendTo("ul#home-list");
 			
-			$("ul#home-list li[data-has]").each(function(){
-				var grh = $(this);
-				var graph = grh.attr("data-graph");
-				var ids = grh.attr("data-has")+"-chart";
-				myScript.DrawHomeGraph($.parseJSON(graph), ids);
-			});
-		});
+		// 	$("ul#home-list li[data-has]").each(function(){
+		// 		var grh = $(this);
+		// 		var graph = grh.attr("data-graph");
+		// 		var ids = grh.attr("data-has")+"-chart";
+		// 		myScript.DrawHomeGraph($.parseJSON(graph), ids);
+		// 	});
+		// });
 		
 		$(document).on('click', 'ul#home-list li', function(){
 			$("ul#home-list li .tile-pop:visible").hide('slow');
