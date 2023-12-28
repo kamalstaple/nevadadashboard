@@ -175,24 +175,14 @@ $taxes =json_decode($economic[4]['data']);
                     <td>{{$real_state->existing->LastYear ?? 'n.a'}} <i class="fa {{$real_state->existing->sign ?? 'n.a'}}"></i></td>
                     <tr>
                     <td></td>
-                    <!-- <td>Northern Nevada</td>
-                    <td>$1.96</td>
-                    <td>Q4 2022</td>
-                    <td>0.0% <i class="fa fa-circle yellow"></i></td>
-                    <td>$0.91</td>
-                    <td>Q4 2022</td>
-                    <td>54.2% <i class="fa fa-caret-up green"></i></td>
-                    <td>$608.00K</td>
-                    <td>Q3 2023</td>
-                    <td>2.9% <i class="fa fa-caret-up green"></i></td> -->
+                   
                 </tr>
                 @endforeach
                 </tr>
 </tbody>
 				</table>			
 			</div>
-			<!-- Tabke End -->
-			<!-- Table Start -->
+			
 			<div class="utilities-table tables" style="display:none;">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<thead>
@@ -226,8 +216,7 @@ $taxes =json_decode($economic[4]['data']);
 </tbody>
 				</table>			
 			</div>
-			<!-- Tabke End -->
-			<!-- Table Start -->
+			
 			<div class="taxes-table tables" style="display:none;">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<thead>
@@ -257,7 +246,7 @@ $taxes =json_decode($economic[4]['data']);
 </tbody>
 				</table>			
 			</div>
-			<!-- Tabke End -->		
+		
 		</div>
 		<div class="clear"></div>			
 	</section>

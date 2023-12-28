@@ -34,29 +34,7 @@
                         ?>
                         <li data-state="{{$compare->state}}" value="{{$compare->row}}" title="{{$compare->msa}}({{$compare->location}})">{{$compare->msa}}</li>
                         @endforeach
-                        <!-- <li data-state="Georgia" value="43708" title="Atlanta-Sandy Springs-Alpharetta, GA Metropolitan Statistical Area (Atlanta MSA (GA))">Atlanta-Sandy Springs-Alpharetta, GA Metropolitan Statistical Area</li>
-                        <li data-state="Texas" value="12873" title="Austin-Round Rock, TX Metropolitan Statistical Area (Austin MSA (TX))">Austin-Round Rock, TX Metropolitan Statistical Area</li>
-                        <li data-state="California" value="43456" title="Bakersfield, CA Metropolitan Statistical Area (Bakersfield MSA (CA))">Bakersfield, CA Metropolitan Statistical Area</li>
-                        <li data-state="Idaho" value="2164" title="Boise City-Nampa, ID Metropolitan Statistical Area (Boise City MSA (ID))">Boise City-Nampa, ID Metropolitan Statistical Area</li>
-                        <li data-state="North Carolina" value="9222" title="Charlotte-Gastonia-Rock Hill, NC-SC Metropolitan Statistical Area (Charlotte MSA (NC))">Charlotte-Gastonia-Rock Hill, NC-SC Metropolitan Statistical Area</li>
-                        <li data-state="Texas" value="12872" title="Dallas-Fort Worth-Arlington, TX Metropolitan Statistical Area (Dallas MSA (TX))">Dallas-Fort Worth-Arlington, TX Metropolitan Statistical Area</li>
-                        <li data-state="Colorado" value="9290" title="Denver-Aurora-Lakewood, CO Metropolitan Statistical Area (Denver MSA (CO))">Denver-Aurora-Lakewood, CO Metropolitan Statistical Area</li>
-                        <li data-state="Texas" value="9307" title="Houston-The Woodlands-Sugar Land, TX Metropolitan Statistical Area (Houston MSA (TX))">Houston-The Woodlands-Sugar Land, TX Metropolitan Statistical Area</li>
-                        <li data-state="Idaho" value="43768" title="Idaho Falls, ID Metropolitan Statistical Area (Idaho Falls MSA (ID))">Idaho Falls, ID Metropolitan Statistical Area</li>
-                        <li data-state="California" value="2159" title="Los Angeles-Long Beach-Anaheim, CA Metropolitan Statistical Area (Los Angeles MSA (CA))">Los Angeles-Long Beach-Anaheim, CA Metropolitan Statistical Area</li>
-                        <li data-state="Tennessee" value="44558" title="Nashville-Davidson--Murfreesboro--Franklin, TN Metropolitan Statistical Area (Nashville MSA (TN))">Nashville-Davidson--Murfreesboro--Franklin, TN Metropolitan Statistical Area</li>
-                        <li data-state="Nebraska" value="44158" title="Omaha-Council Bluffs, NE-IA Metropolitan Statistical Area (Omaha MSA (NE))">Omaha-Council Bluffs, NE-IA Metropolitan Statistical Area</li>
-                        <li data-state="Florida" value="43660" title="Orlando-Kissimmee-Sanford, FL Metropolitan Statistical Area (Orlando MSA (FL))">Orlando-Kissimmee-Sanford, FL Metropolitan Statistical Area</li>
-                        <li data-state="Arizona" value="2161" title="Phoenix-Mesa-Glendale, AZ Metropolitan Statistical Area (Phoenix MSA (AZ))">Phoenix-Mesa-Glendale, AZ Metropolitan Statistical Area</li>
-                        <li data-state="Oregon" value="2167" title="Portland-Vancouver-Hillsboro, OR-WA Metropolitan Statistical Area (Portland MSA (OR))">Portland-Vancouver-Hillsboro, OR-WA Metropolitan Statistical Area</li>
-                        <li data-state="Utah" value="44670" title="Provo-Orem, UT Metropolitan Statistical Area (Provo MSA (UT))">Provo-Orem, UT Metropolitan Statistical Area</li>
-                        <li data-state="California" value="43504" title="Riverside-San Bernardino-Ontario, CA Metropolitan Statistical Area (Riverside MSA (CA))">Riverside-San Bernardino-Ontario, CA Metropolitan Statistical Area</li>
-                        <li data-state="California" value="43508" title="Sacramento--Roseville--Arden-Arcade, CA Metropolitan Statistical Area (Sacramento MSA (CA))">Sacramento--Roseville--Arden-Arcade, CA Metropolitan Statistical Area</li>
-                        <li data-state="Utah" value="2163" title="Salt Lake City, UT Metropolitan Statistical Area (Salt Lake City MSA (UT))">Salt Lake City, UT Metropolitan Statistical Area</li>
-                        <li data-state="California" value="2158" title="San Francisco-Oakland-Hayward, CA Metropolitan Statistical Area (San Francisco MSA (CA))">San Francisco-Oakland-Hayward, CA Metropolitan Statistical Area</li>
-                        <li data-state="Washington" value="12865" title="Seattle-Tacoma-Bellevue, WA Metropolitan Statistical Area (Seattle MSA (WA))">Seattle-Tacoma-Bellevue, WA Metropolitan Statistical Area</li>
-                        <li data-state="Washington" value="44749" title="Spokane-Spokane Valley, WA Metropolitan Statistical Area (Spokane MSA (WA))">Spokane-Spokane Valley, WA Metropolitan Statistical Area</li>
-                        <li data-state="Arizona" value="2160" title="Tucson, AZ Metropolitan Statistical Area (Tucson MSA (AZ))">Tucson, AZ Metropolitan Statistical Area</li> -->
+                      
                     </ul>
 				</div>
 			</div>

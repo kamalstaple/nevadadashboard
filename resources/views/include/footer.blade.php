@@ -17,23 +17,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+    <script src="{{asset('js/pagejs/footer.js')}}"></script>
   
-  $(document).ready(function(){
-  $('.economic_cards').click(function(){
-    $(this).addClass('active');
-  });
-  $('.remove_list').click(function(event){
-    event.stopPropagation();
-    $(this).closest('.economic_cards').removeClass('active');
-  });
-});
-      </script>
-      <script>
-$(document).ready(function(){
-	$(".navigation li.active").trigger('click');
-});
-</script>
 <script>
   AOS.init();
 </script>
