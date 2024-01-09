@@ -456,7 +456,7 @@ var myScript = new ( function($) {
 		//$.colorbox.close();
 		myScript.sendAjax(param, function(data){
 			if(parseInt(data.result) == 1 && data.name != ''){
-				window.location.href = "portal.php?download="+data.name;
+				window.location.href = "download?name="+data.name;
 				//self.processing();
 			}
 		});

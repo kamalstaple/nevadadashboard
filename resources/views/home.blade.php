@@ -67,7 +67,7 @@ foreach ($spending->trendList as $chartdata) {
                  $cleaned_value = str_replace("$", "", $cleaned_value);
                  $cleaned_value = str_replace(".", " ", $cleaned_value);
                  ?>
-                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $population->valueformated);}}<span>{{$cleaned_value}}</span></h5>
+                <h5 class="economic_number">{{ number_format(preg_replace("/[A-Za-z]+/", "",$population->valueformated), 1)}}<span>{{$cleaned_value}}</span></h5>
                 
                 
                 <span class="economic_year">{{$population->Date}}</span>
@@ -103,7 +103,7 @@ foreach ($spending->trendList as $chartdata) {
                  $cleaned_value = str_replace("$", "", $cleaned_value);
                  $cleaned_value = str_replace(".", " ", $cleaned_value);
                  ?>
-                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $economical->valueformated);}}<span>{{$cleaned_value}}</span></h5>
+                <h5 class="economic_number">{{number_format(preg_replace("/[A-Za-z]+/", "", $economical->valueformated),1)}}<span>{{$cleaned_value}}</span></h5>
                 
                 <span class="economic_year">{{$economical->Date}}</span>
                  <div class="bottom_details">
@@ -139,7 +139,7 @@ foreach ($spending->trendList as $chartdata) {
                  $cleaned_value = str_replace("$", "", $cleaned_value);
                  $cleaned_value = str_replace(".", " ", $cleaned_value);
                  ?>
-                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $spending->valueformated);}}<span>{{$cleaned_value}}</span></h5>
+                <h5 class="economic_number">{{preg_replace("/[A-Za-z]+/", "", $spending->valueformated)}}<span>{{$cleaned_value}}</span></h5>
                 <span class="economic_year">{{$spending->Date}}</span>
                  <div class="bottom_details">
                   <div class="prior_click">
