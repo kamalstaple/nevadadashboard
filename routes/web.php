@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\NavedaController;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\NavedaController;
+use App\Http\Controllers\Download;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ Route::get('/overview', [NavedaController::class , 'overviewpage'])->name('/over
 Route::get('/location_comparistion', [NavedaController::class , 'locationcomparistion'])->name('/location_comparistion');
 
 Route::post('/mr_portal', [NavedaController::class , 'mr_portal'])->name('/mr_portal');
-Route::get('/download', [NavedaController::class , 'download'])->name('/download');
+Route::get('/download', [Download::class , 'download'])->name('/download');
 
 
 
